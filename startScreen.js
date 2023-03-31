@@ -12,7 +12,7 @@ function setup() {
 
   button.style("font-size", "45px");
 
-  // button.mousePressed(levelOne);
+  // link it to the lavelOne page. button.mousePressed(levelOne);
 }
 
 function startScreen() {
