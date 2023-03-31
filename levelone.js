@@ -2,6 +2,22 @@ function setup() {
   createCanvas(1200, 600);
 }
 
+function obstacles(x, y) {
+  push();
+  fill(111, 78, 55);
+  //
+  triangle(x + 330, y + 430, x + 350, y + 430, x + 340, y + 410);
+  triangle(x + 350, y + 430, x + 370, y + 430, x + 360, y + 410);
+  //
+  triangle(x + 900, y + 250, x + 920, y + 250, x + 910, y + 230);
+  triangle(x + 920, y + 250, x + 940, y + 250, x + 930, y + 230);
+  //
+  triangle(x + 960, y + 280, x + 980, y + 280, x + 970, y + 300);
+  triangle(x + 980, y + 280, x + 1020, y + 280, x + 1000, y + 330);
+
+  pop();
+}
+
 function borderOne(x, y) {
   strokeWeight(1);
   // border
@@ -91,6 +107,7 @@ function levelOne() {
   background(255, 252, 186);
   mapOne(0, 0);
   borderOne(0, 0);
+  obstacles(0, 0);
 }
 
 function draw() {
