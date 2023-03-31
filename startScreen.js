@@ -25,7 +25,7 @@ function startScreen() {
 // text: history
 fill(255, 255, 255);
 textSize(15);
-text("History", 900, 500, 100, 100);
+text("History", 915, 500, 100, 100);
 // text: instructions 
 fill(255, 255, 255);
 textSize(15);
