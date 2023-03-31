@@ -22,14 +22,14 @@ function startScreen() {
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("TIMEMACHINE", 590, 100);
-// text: history
-fill(255, 255, 255);
-textSize(15);
-text("History", 915, 500, 100, 100);
-// text: instructions 
-fill(255, 255, 255);
-textSize(15);
-text("Instructions", 900, 520, 100, 100);
+  // text: history
+  fill(255, 255, 255);
+  textSize(15);
+  text("History", 915, 500, 100, 100);
+  // text: instructions
+  fill(255, 255, 255);
+  textSize(15);
+  text("Instructions", 900, 520, 100, 100);
 }
 
 function draw() {
