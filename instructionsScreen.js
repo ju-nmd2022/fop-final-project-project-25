@@ -27,7 +27,7 @@ function instructionsScreen() {
   let bullet = "• "; // Define the bullet point
   // helped by chatGPT in the next 5 lines of code on how to make the array display vertically
   let x = 390; // Set the initial x position
-  let y = 200; // Set the initial y position
+  let y = 170; // Set the initial y position
   for (let i = 0; i < instructionsList.length; i++) {
     fill(255, 255, 255);
   textSize(15);
