@@ -19,6 +19,9 @@ function obstacles(x, y) {
 }
 
 function borderOne(x, y) {
+  push();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "white";
   strokeWeight(1);
   // border
   fill(225, 193, 110);
@@ -49,6 +52,7 @@ function borderOne(x, y) {
   vertex(x, y + 550);
 
   endShape();
+  pop();
 }
 
 function mapOne(x, y) {
@@ -103,11 +107,23 @@ function mapOne(x, y) {
   pop();
 }
 
+function door(x, y) {
+  push();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "white";
+  fill(225, 193, 110);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(255, 223, 150);
+  rect(x + 1030, y + 460, 70, 90);
+  pop();
+}
+
 function levelOne() {
   background(255, 252, 186);
   mapOne(0, 0);
   borderOne(0, 0);
   obstacles(0, 0);
+  door(0, 0);
 }
 
 function draw() {

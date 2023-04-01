@@ -69,7 +69,6 @@ function mapTwo(x, y) {
 
   //map
   rect(x + 835, y + 520, 90, 20, 1);
-  rect(x + 40, y + 250, 130, 30, 1);
   pop();
 
   //top map
@@ -90,11 +89,23 @@ function mapTwo(x, y) {
   endShape();
 }
 
+function door(x, y) {
+  push();
+  drawingContext.shadowBlur = 2;
+  drawingContext.shadowColor = "white";
+  fill(111, 85, 55);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(131, 95, 55);
+  rect(x + 1030, y + 460, 70, 90);
+  pop();
+}
+
 function levelTwo() {
-  background(138, 154, 91);
+  background(178, 194, 131);
   mapTwo(0, 0);
   borderTwo(0, 0);
   obstacles(0, 0);
+  door(0, 0);
 }
 
 function draw() {
