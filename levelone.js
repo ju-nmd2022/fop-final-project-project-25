@@ -2,9 +2,9 @@ function setup() {
   createCanvas(1200, 600);
 }
 
-function obstacles(x, y) {
+function obstaclesOne(x, y) {
   push();
-  fill(111, 78, 55);
+  fill(225, 193, 110);
   //
   triangle(x + 330, y + 430, x + 350, y + 430, x + 340, y + 410);
   triangle(x + 350, y + 430, x + 370, y + 430, x + 360, y + 410);
@@ -107,7 +107,7 @@ function mapOne(x, y) {
   pop();
 }
 
-function door(x, y) {
+function doorOne(x, y) {
   push();
   drawingContext.shadowBlur = 5;
   drawingContext.shadowColor = "white";
@@ -122,8 +122,8 @@ function levelOne() {
   background(255, 252, 186);
   mapOne(0, 0);
   borderOne(0, 0);
-  obstacles(0, 0);
-  door(0, 0);
+  obstaclesOne(0, 0);
+  doorOne(0, 0);
 }
 
 function draw() {

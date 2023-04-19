@@ -2,7 +2,7 @@ function setup() {
   createCanvas(1200, 600);
 }
 
-function obstacles(x, y) {
+function obstaclesTwo(x, y) {
   push();
   fill(72, 60, 50);
   // 1
@@ -89,7 +89,7 @@ function mapTwo(x, y) {
   endShape();
 }
 
-function door(x, y) {
+function doorTwo(x, y) {
   push();
   drawingContext.shadowBlur = 2;
   drawingContext.shadowColor = "white";
@@ -104,8 +104,8 @@ function levelTwo() {
   background(178, 194, 131);
   mapTwo(0, 0);
   borderTwo(0, 0);
-  obstacles(0, 0);
-  door(0, 0);
+  obstaclesTwo(0, 0);
+  doorTwo(0, 0);
 }
 
 function draw() {

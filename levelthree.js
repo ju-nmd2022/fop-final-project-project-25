@@ -2,7 +2,7 @@ function setup() {
   createCanvas(1200, 600);
 }
 
-function obstacles(x, y) {
+function obstaclesThree(x, y) {
   push();
   fill(200, 200, 200);
   // 1
@@ -112,7 +112,7 @@ function mapThree(x, y) {
   endShape();
 }
 
-function door(x, y) {
+function doorThree(x, y) {
   push();
   drawingContext.shadowBlur = 5;
   drawingContext.shadowColor = "white";
@@ -151,8 +151,8 @@ function levelThree() {
   pop();
   mapThree(0, 0);
   borderThree(0, 0);
-  obstacles(0, 0);
-  door(0, 0);
+  obstaclesThree(0, 0);
+  doorThree(0, 0);
 }
 
 function draw() {
