@@ -44,11 +44,14 @@ function obstaclesOne(x, y) {
   push();
   fill(225, 193, 110);
   //
-  triangle(x + 330, y + 430, x + 350, y + 430, x + 340, y + 410);
-  triangle(x + 350, y + 430, x + 370, y + 430, x + 360, y + 410);
+  triangle(x + 330, y + 450, x + 350, y + 450, x + 340, y + 430);
+  triangle(x + 350, y + 450, x + 370, y + 450, x + 360, y + 430);
   //
-  triangle(x + 1040, y + 300, x + 1020, y + 300, x + 1030, y + 280);
-  triangle(x + 1000, y + 300, x + 1020, y + 300, x + 1010, y + 280);
+  triangle(x + 1040, y + 320, x + 1020, y + 320, x + 1030, y + 300);
+  triangle(x + 1000, y + 320, x + 1020, y + 320, x + 1010, y + 300);
+  //
+  triangle(x + 550, y + 380, x + 570, y + 380, x + 560, y + 400);
+  triangle(x + 570, y + 380, x + 610, y + 380, x + 590, y + 430);
 
   pop();
 }
@@ -77,9 +80,9 @@ function liquidOne(x, y) {
   noStroke();
   drawingContext.shadowBlur = 5;
   drawingContext.shadowColor = "red";
-  rect(x + 700, y + 305, 200, 30);
-  rect(x + 180, y + 555, 200, 30);
-  rect(x + 750, y + 555, 230, 30);
+  rect(x + 700, y + 325, 200, 30);
+  rect(x + 180, y + 555, 290, 30);
+  rect(x + 680, y + 555, 230, 30);
   pop();
 }
 
@@ -90,7 +93,6 @@ function liquidTwo(x, y) {
   fill(85, random(100, 110), 47);
   noStroke();
   drawingContext.shadowBlur = 5;
-
   drawingContext.shadowColor = "green";
   rect(x + 880, y + 225, 170, 30);
   rect(x + 100, y + 555, 1000, 30);
@@ -116,23 +118,20 @@ function borderOne(x, y) {
   vertex(x + 200, y + 550);
   vertex(x + 220, y + 580);
   vertex(x + 240, y + 580);
-  vertex(x + 260, y + 550);
-  //
-  vertex(x + 320, y + 550);
   vertex(x + 340, y + 580);
-  vertex(x + 360, y + 580);
-  vertex(x + 380, y + 550);
+  vertex(x + 440, y + 580);
+  vertex(x + 460, y + 550);
   //
-  vertex(x + 780, y + 550);
-  vertex(x + 800, y + 580);
-  vertex(x + 950, y + 580);
-  vertex(x + 970, y + 550);
+  vertex(x + 680, y + 550);
+  vertex(x + 700, y + 580);
+  vertex(x + 850, y + 580);
+  vertex(x + 870, y + 550);
   //
   vertex(x + 1200, y + 550);
   vertex(x + 1200, y + 600);
   vertex(x, y + 600);
   vertex(x, y + 550);
-
+  //
   endShape();
   pop();
 }
@@ -169,37 +168,34 @@ function mapOne(x, y) {
   fill(225, 193, 110);
   //map left
 
-  beginShape();
-
-  rect(x + 40, y + 430, 410, 30, 1);
-  endShape();
+  rect(x + 210, y + 450, 240, 30, 1);
 
   //map right
 
   beginShape();
-  vertex(x + 520, y + 330);
-  vertex(x + 580, y + 330);
-  vertex(x + 580, y + 300);
+  vertex(x + 520, y + 350);
+  vertex(x + 580, y + 350);
+  vertex(x + 580, y + 320);
   //
-  vertex(x + 700, y + 300);
-  vertex(x + 720, y + 330);
-  vertex(x + 880, y + 330);
-  vertex(x + 900, y + 300);
+  vertex(x + 700, y + 320);
+  vertex(x + 720, y + 350);
+  vertex(x + 880, y + 350);
+  vertex(x + 900, y + 320);
 
   //
-  vertex(x + 900, y + 300);
+  vertex(x + 900, y + 320);
 
-  vertex(x + 1160, y + 300);
-  vertex(x + 1160, y + 360);
-  vertex(x + 920, y + 360);
-  vertex(x + 920, y + 360);
-  vertex(x + 520, y + 360);
-  vertex(x + 520, y + 330);
+  vertex(x + 1160, y + 320);
+  vertex(x + 1160, y + 380);
+  vertex(x + 920, y + 380);
+  vertex(x + 920, y + 380);
+  vertex(x + 520, y + 380);
+  vertex(x + 520, y + 350);
 
   endShape();
 
   //map
-  rect(x + 835, y + 520, 80, 20, 1);
+  rect(x + 740, y + 510, 80, 20, 1);
   rect(x + 760, y + 270, 80, 20, 1);
   pop();
 }
