@@ -89,6 +89,20 @@ function mapTwo(x, y) {
   endShape();
 }
 
+function liquidTwo(x, y) {
+  // liquid
+
+  push();
+  fill(0, 100, 0);
+  noStroke();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "green";
+  rect(x + 880, y + 225, 170, 30);
+  rect(x + 100, y + 555, 1000, 30);
+
+  pop();
+}
+
 function doorTwo(x, y) {
   push();
   drawingContext.shadowBlur = 2;
@@ -102,6 +116,7 @@ function doorTwo(x, y) {
 
 function levelTwo() {
   background(178, 194, 131);
+  liquidTwo(0, 0);
   mapTwo(0, 0);
   borderTwo(0, 0);
   obstaclesTwo(0, 0);

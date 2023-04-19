@@ -112,6 +112,21 @@ function mapThree(x, y) {
   endShape();
 }
 
+function liquidThree(x, y) {
+  // liquid
+
+  push();
+  fill(255, 215, 0);
+  noStroke();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "orange";
+  rect(x + 790, y + 175, 200, 30);
+  rect(x + 450, y + 385, 200, 30);
+  rect(x + 100, y + 555, 1000, 30);
+
+  pop();
+}
+
 function doorThree(x, y) {
   push();
   drawingContext.shadowBlur = 5;
@@ -149,6 +164,7 @@ function levelThree() {
     starAlpha[index] = starAlpha[index] + 0.03;
   }
   pop();
+  liquidThree(0, 0);
   mapThree(0, 0);
   borderThree(0, 0);
   obstaclesThree(0, 0);

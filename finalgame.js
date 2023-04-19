@@ -1,5 +1,5 @@
 let isGameActive = true;
-state = "start";
+let state = "start";
 
 function setup() {
   createCanvas(1200, 600);
@@ -60,12 +60,57 @@ function obstaclesThree(x, y) {
   pop();
 }
 
+/////////LIQUID//////////
+
+function liquidOne(x, y) {
+  // liquid
+  fill(255, random(140, 150), 0);
+  push();
+  noStroke();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "red";
+  rect(x + 600, y + 285, 170, 30);
+  rect(x + 180, y + 555, 200, 30);
+  rect(x + 750, y + 555, 230, 30);
+  pop();
+}
+
+function liquidTwo(x, y) {
+  // liquid
+
+  push();
+  fill(85, random(100, 110), 47);
+  noStroke();
+  drawingContext.shadowBlur = 5;
+
+  drawingContext.shadowColor = "green";
+  rect(x + 880, y + 225, 170, 30);
+  rect(x + 100, y + 555, 1000, 30);
+
+  pop();
+}
+
+function liquidThree(x, y) {
+  // liquid
+
+  push();
+  fill(255, random(190, 215), 0);
+  noStroke();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "orange";
+  rect(x + 790, y + 175, 200, 30);
+  rect(x + 450, y + 385, 200, 30);
+  rect(x + 100, y + 555, 1000, 30);
+
+  pop();
+}
+
 /////////BORDERS//////////
 
 function borderOne(x, y) {
   push();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "white";
+  //drawingContext.shadowBlur = 5;
+  //drawingContext.shadowColor = "white";
   strokeWeight(1);
   // border
   fill(225, 193, 110);
@@ -372,6 +417,7 @@ function startScreen() {
 
 function levelOne() {
   background(255, 252, 186);
+  liquidOne(0, 0);
   mapOne(0, 0);
   borderOne(0, 0);
   obstaclesOne(0, 0);
@@ -380,6 +426,7 @@ function levelOne() {
 
 function levelTwo() {
   background(178, 194, 131);
+  liquidTwo(0, 0);
   mapTwo(0, 0);
   borderTwo(0, 0);
   obstaclesTwo(0, 0);
@@ -390,7 +437,7 @@ function levelThree() {
   push();
   noStroke();
   background(0, 0, 0);
-
+  liquidThree(0, 0);
   pop();
   mapThree(0, 0);
   borderThree(0, 0);

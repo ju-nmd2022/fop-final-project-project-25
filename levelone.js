@@ -4,8 +4,9 @@ function setup() {
 
 function obstaclesOne(x, y) {
   push();
+
   fill(225, 193, 110);
-  //
+  // spikes
   triangle(x + 330, y + 430, x + 350, y + 430, x + 340, y + 410);
   triangle(x + 350, y + 430, x + 370, y + 430, x + 360, y + 410);
   //
@@ -20,8 +21,8 @@ function obstaclesOne(x, y) {
 
 function borderOne(x, y) {
   push();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "white";
+  //drawingContext.shadowBlur = 5;
+  //drawingContext.shadowColor = "white";
   strokeWeight(1);
   // border
   fill(225, 193, 110);
@@ -107,6 +108,19 @@ function mapOne(x, y) {
   pop();
 }
 
+function liquidOne(x, y) {
+  // liquid
+  fill(255, random(140, 150), 0);
+  push();
+  noStroke();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "red";
+  rect(x + 600, y + 285, 170, 30);
+  rect(x + 180, y + 555, 200, 30);
+  rect(x + 750, y + 555, 230, 30);
+  pop();
+}
+
 function doorOne(x, y) {
   push();
   drawingContext.shadowBlur = 5;
@@ -120,6 +134,7 @@ function doorOne(x, y) {
 
 function levelOne() {
   background(255, 252, 186);
+  liquidOne(0, 0);
   mapOne(0, 0);
   borderOne(0, 0);
   obstaclesOne(0, 0);
