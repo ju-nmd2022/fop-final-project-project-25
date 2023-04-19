@@ -3,6 +3,37 @@ let state = "start";
 
 function setup() {
   createCanvas(1200, 600);
+
+  // start button
+  startButton = createButton("START");
+  startButton.position(530, 320);
+  startButton.style("color:black");
+  startButton.style("background-color:red");
+  startButton.style("border", "none");
+  startButton.style("border-radius", "10px");
+  startButton.size(220, 100);
+  startButton.style("font-size", "45px");
+  startButton.hide();
+
+  // play again button winscreen
+  winButton = createButton("PLAY AGAIN");
+  winButton.position(530, 470);
+  winButton.style("color:white");
+  winButton.style("background-color:black");
+  winButton.style("border", "none");
+  winButton.size(200, 30);
+  winButton.style("font-size", "30px");
+  winButton.hide();
+
+  // try again button failscreen
+  failButton = createButton("TRY AGAIN");
+  failButton.position(530, 470);
+  failButton.style("color:white");
+  failButton.style("background-color:black");
+  failButton.style("border", "none");
+  failButton.size(200, 30);
+  failButton.style("font-size", "30px");
+  failButton.hide();
 }
 
 //////////////SCREENS ONE SETUP////////////////
@@ -413,6 +444,7 @@ function startScreen() {
   fill(255, 255, 255);
   textSize(15);
   text("Instructions", 900, 520, 100, 100);
+  startButton.show();
 }
 
 function levelOne() {
@@ -422,6 +454,7 @@ function levelOne() {
   borderOne(0, 0);
   obstaclesOne(0, 0);
   doorOne(0, 0);
+  startButton.hide();
 }
 
 function levelTwo() {
@@ -431,6 +464,7 @@ function levelTwo() {
   borderTwo(0, 0);
   obstaclesTwo(0, 0);
   doorTwo(0, 0);
+  startButton.hide();
 }
 
 function levelThree() {
@@ -443,6 +477,7 @@ function levelThree() {
   borderThree(0, 0);
   obstaclesThree(0, 0);
   doorThree(0, 0);
+  startButton.hide();
 }
 
 function winScreen() {
@@ -461,6 +496,8 @@ function winScreen() {
   fill(255, 255, 255);
   textSize(25);
   text("YOU MADE THE TIME MACHINE WORK AGAIN!", 310, 220, 700, 100);
+  winButton.show();
+  startButton.hide();
 }
 
 function failScreen() {
@@ -470,6 +507,9 @@ function failScreen() {
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("GAME OVER...", 620, 100);
+  failButton.show();
+  winButton.hide();
+  startButton.hide();
 }
 
 //////////////FUNCTION MOUSECLICKED////////////////
