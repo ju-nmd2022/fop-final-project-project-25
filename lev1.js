@@ -166,7 +166,7 @@ function levelOne() {
     jumpCounter = 0;
   }
   //jumping on the top left small box
-  if (p1X >= 520 && p1X <= 580 && p1Y >= 290 && p1Y<= 520 && jump === false) {
+  if (p1X >= 520 && p1X <= 580 && p1Y >= 290 && p1Y<= 320 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
