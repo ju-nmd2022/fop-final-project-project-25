@@ -158,22 +158,25 @@ function levelOne() {
   ///////////////
 
 
+
   //jumping on the first box on the left
-  if (p1X >= 210 && p1X <= 450 && p1Y >= 390 && p1Y<= 480) {
+  if (p1X >= 210 && p1X <= 450 && p1Y >= 390 && p1Y<= 480 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
+    jumpCounter = 0;
   }
   //jumping on the top left small box
-  if (p1X >= 520 && p1X <= 580 && p1Y >= 290 && p1Y<= 520) {
+  if (p1X >= 520 && p1X <= 580 && p1Y >= 290 && p1Y<= 520 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
+    jumpCounter = 0;
   }
   // jumping on the top left big box
-  if (p1X >= 580 && p1X <= 1160 && p1Y >= 260 && p1Y<= 320) {
+  if (p1X >= 580 && p1X <= 1160 && p1Y >= 260 && p1Y<= 320 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
-  }
-
+    jumpCounter = 0;
+}
 
 
 
