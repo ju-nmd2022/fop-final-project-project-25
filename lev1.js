@@ -160,24 +160,35 @@ function levelOne() {
 
 
   //jumping on the first box on the left
-  if (p1X >= 210 && p1X <= 450 && p1Y >= 390 && p1Y<= 480 && jump === false) {
+  if (p1X >= 190 && p1X <= 450 && p1Y >= 390 && p1Y<= 480 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
-  //jumping on the top left small box
-  if (p1X >= 520 && p1X <= 580 && p1Y >= 290 && p1Y<= 320 && jump === false) {
+  //jumping on the top right small box
+  if (p1X >= 500 && p1X <= 580 && p1Y >= 290 && p1Y<= 320 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
-  // jumping on the top left big box
-  if (p1X >= 580 && p1X <= 1160 && p1Y >= 260 && p1Y<= 320 && jump === false) {
+  // jumping on the top right big box
+  if (p1X >= 560 && p1X <= 1160 && p1Y >= 260 && p1Y<= 320 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
 }
-
+// jumping on the small floating box on top right
+if (p1X >= 740 && p1X <= 840 && p1Y >= 210 && p1Y<= 230 && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+// jumping on the small floating box on bottom right
+if (p1X >= 730 && p1X <= 820 && p1Y >= 450 && p1Y<= 470 && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
 
 
 
