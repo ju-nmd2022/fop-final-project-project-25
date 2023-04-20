@@ -156,6 +156,12 @@ function levelOne() {
   rect(p1X, p1Y, pWidth, pHeight);
   pop();
   ///////////////
+
+  //jumping on boxes
+  if (p1X >= 210 && p1X <= 450 && p1Y >= 390 && p1Y <= 480) {
+    p1Y = p1Y; // don't fall through
+    velocity = 0;
+  }
 }
 
 function gravity() {
