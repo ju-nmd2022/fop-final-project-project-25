@@ -1,6 +1,7 @@
 let stage = 0;
 let jump = false;
 let direction = 1; //forse of gravity in the y direction
+
 let velocity = 2; // the speed of character
 let jumpPower = 11; //how high character jumps
 let fallingSpeed = 2; //equal to velocity
