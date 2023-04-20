@@ -2,11 +2,12 @@ let stage = 0;
 let jump = false;
 let direction = 1; //forse of gravity in the y direction
 let velocity = 2; // the speed of character
-let jumpPower = 12; //how high character jumps
+let jumpPower = 11; //how high character jumps
 let fallingSpeed = 2; //equal to velocity
 let minHeight = 490; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
+//////////////
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
 let p1Y = 490;
@@ -157,42 +158,36 @@ function levelOne() {
   pop();
   ///////////////
 
-
-
   //jumping on the first box on the left
-  if (p1X >= 190 && p1X <= 450 && p1Y >= 390 && p1Y<= 480 && jump === false) {
+  if (p1X >= 190 && p1X <= 450 && p1Y >= 390 && p1Y <= 480 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the top right small box
-  if (p1X >= 500 && p1X <= 580 && p1Y >= 290 && p1Y<= 320 && jump === false) {
+  if (p1X >= 500 && p1X <= 580 && p1Y >= 290 && p1Y <= 320 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the top right big box
-  if (p1X >= 560 && p1X <= 1160 && p1Y >= 260 && p1Y<= 320 && jump === false) {
+  if (p1X >= 560 && p1X <= 1160 && p1Y >= 260 && p1Y <= 320 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
-}
-// jumping on the small floating box on top right
-if (p1X >= 740 && p1X <= 840 && p1Y >= 210 && p1Y<= 230 && jump === false) {
-  p1Y = p1Y; // don't fall through
-  velocity = 0;
-  jumpCounter = 0;
-}
-// jumping on the small floating box on bottom right
-if (p1X >= 730 && p1X <= 820 && p1Y >= 450 && p1Y<= 470 && jump === false) {
-  p1Y = p1Y; // don't fall through
-  velocity = 0;
-  jumpCounter = 0;
-}
-
-
-
-
+  }
+  // jumping on the small floating box on top right
+  if (p1X >= 740 && p1X <= 840 && p1Y >= 210 && p1Y <= 230 && jump === false) {
+    p1Y = p1Y; // don't fall through
+    velocity = 0;
+    jumpCounter = 0;
+  }
+  // jumping on the small floating box on bottom right
+  if (p1X >= 730 && p1X <= 820 && p1Y >= 450 && p1Y <= 470 && jump === false) {
+    p1Y = p1Y; // don't fall through
+    velocity = 0;
+    jumpCounter = 0;
+  }
 }
 function gravity() {
   if (p1Y >= minHeight && jump === false) {
