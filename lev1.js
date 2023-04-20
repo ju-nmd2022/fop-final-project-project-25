@@ -2,7 +2,7 @@ let stage = 0;
 let jump = false;
 let direction = 1; //forse of gravity in the y direction
 let velocity = 2; // the speed of character
-let jumpPower = 15; //how high character jumps
+let jumpPower = 12; //how high character jumps
 let fallingSpeed = 2; //equal to velocity
 let minHeight = 490; // height of ground
 let maxHeight = 50; // height of sky
@@ -158,9 +158,10 @@ function levelOne() {
   ///////////////
 
   //jumping on boxes
-  if (p1X >= 210 && p1X <= 450 && p1Y >= 390 && p1Y <= 480) {
+  if (p1X >= 210 && p1X <= 450 && p1Y >= 390 && p1Y <= 480 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
+    jumpCounter = 0;
   }
 }
 
