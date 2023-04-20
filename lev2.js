@@ -14,11 +14,6 @@ let p1Y = 490;
 let pWidth = 30;
 let pHeight = 60;
 
-let b2X = 220;
-let b2Y = 500;
-let b2Width = 130;
-let b2Height = 90;
-
 function setup() {
   createCanvas(1200, 600);
 }
@@ -135,12 +130,6 @@ function levelTwo() {
   background(178, 194, 131);
   liquidTwo(0, 0);
   ///////////////
-  push();
-  //box 1
-  fill(0, 0, 0);
-  rect(b2X, b2Y, b2Width, b2Height);
-  pop();
-  ///////////////
   mapTwo(0, 0);
   borderTwo(0, 0);
   obstaclesTwo(0, 0);
@@ -193,4 +182,6 @@ function keyPressed() {
 
 function draw() {
   levelTwo();
+  keyPressed();
+  gravity();
 }
