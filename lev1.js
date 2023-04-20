@@ -1,9 +1,9 @@
 let stage = 0;
 let jump = false;
 let direction = 1; //forse of gravity in the y direction
-let velocity = 2; // the speed of character
-let jumpPower = 12; //how high character jumps
-let fallingSpeed = 2; //equal to velocity
+let velocity = 1; // the speed of character
+let jumpPower = 13; //how high character jumps
+let fallingSpeed = 4; //equal to velocity
 let minHeight = 490; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
