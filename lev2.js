@@ -140,6 +140,48 @@ function levelTwo() {
   rect(p1X, p1Y, pWidth, pHeight);
   pop();
   ///////////////
+ //jumping on the first box from the left
+ if (p1X >= 200 && p1X <= 350 && p1Y >= 440 && p1Y <= minHeight && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+//jumping on the second box from the left
+if (p1X >= 330 && p1X <= 420 && p1Y >= 380 && p1Y <= minHeight && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+//jumping on the third box from the left
+if (p1X >= 460 && p1X <= 600 && p1Y >= 320 && p1Y <= minHeight && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+//jumping on the fourth box from the bottom
+if (p1X >= 600 && p1X <= 770 && p1Y >= 390 && p1Y <= minHeight && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+//jumping on the box floating on the bottom right
+if (p1X >= 815 && p1X <= 925 && p1Y >= 460 && p1Y <= 480 && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+//jumping on the first box from the right on the top
+if (p1X >= 830 && p1X <= 1160 && p1Y >= 160 && p1Y <= 240 && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
+//jumping on the second box from the right on the top
+if (p1X >= 620 && p1X <= 850 && p1Y >= 210 && p1Y <= 240 && jump === false) {
+  p1Y = p1Y; // don't fall through
+  velocity = 0;
+  jumpCounter = 0;
+}
 }
 
 function gravity() {
