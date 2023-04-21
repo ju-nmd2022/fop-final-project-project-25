@@ -152,8 +152,6 @@ function levelOne() {
   doorOne(0, 0);
   ///////////////
 
-  ///////////////
-
   //jumping on the first box on the left
   if (p1X >= 190 && p1X <= 450 && p1Y >= 390 && p1Y <= 480 && jump === false) {
     p1Y = 390; // don't fall through
@@ -191,6 +189,7 @@ function levelOne() {
   rect(p1X, p1Y, pWidth, pHeight);
   pop();
 }
+
 function gravity() {
   if (p1Y >= minHeight && jump === false) {
     //stop falling on the ground
