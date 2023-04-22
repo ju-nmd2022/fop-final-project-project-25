@@ -86,15 +86,23 @@ function mapTwo(x, y) {
   vertex(x + 420, y + 600);
   vertex(x + 480, y + 600);
   vertex(x + 480, y + 380);
-  vertex(x + 600, y + 380);
-  vertex(x + 600, y + 450);
-  vertex(x + 770, y + 450);
+  //
+  vertex(x + 520, y + 380);
+  vertex(x + 520, y + 340);
+  vertex(x + 600, y + 340);
+  //
+
+  vertex(x + 600, y + 430);
+
+  //
+
+  vertex(x + 770, y + 430);
   vertex(x + 770, y + 600);
   vertex(x + 220, y + 600);
   endShape();
 
   //map
-  rect(x + 835, y + 520, 90, 20, 1);
+  rect(x + 835, y + 490, 90, 20, 1);
 
   //top map
   beginShape();
@@ -162,7 +170,7 @@ function levelTwo() {
   //jumping on the third box from the left
   if (
     p1X >= 460 &&
-    p1X <= 600 &&
+    p1X <= 520 &&
     p1Y >= 320 &&
     p1Y <= minHeight &&
     jump === false
@@ -171,11 +179,25 @@ function levelTwo() {
     velocity = 0;
     jumpCounter = 0;
   }
+
   //jumping on the fourth box from the bottom
+  if (
+    p1X >= 520 &&
+    p1X <= 600 &&
+    p1Y >= 280 &&
+    p1Y <= minHeight &&
+    jump === false
+  ) {
+    p1Y = p1Y; // don't fall through
+    velocity = 0;
+    jumpCounter = 0;
+  }
+
+  //jumping on the fifth box from the bottom
   if (
     p1X >= 600 &&
     p1X <= 770 &&
-    p1Y >= 390 &&
+    p1Y >= 370 &&
     p1Y <= minHeight &&
     jump === false
   ) {
@@ -184,7 +206,7 @@ function levelTwo() {
     jumpCounter = 0;
   }
   //jumping on the box floating on the bottom right
-  if (p1X >= 815 && p1X <= 925 && p1Y >= 460 && p1Y <= 480 && jump === false) {
+  if (p1X >= 815 && p1X <= 925 && p1Y >= 430 && p1Y <= 480 && jump === false) {
     p1Y = p1Y; // don't fall through
     velocity = 0;
     jumpCounter = 0;
