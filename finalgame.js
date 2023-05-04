@@ -12,8 +12,8 @@ let jumpCounter = 0;
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
 let p1Y = 490;
-let pWidth = 30;
-let pHeight = 60;
+let pWidth = 50;
+let pHeight = 95;
 
 let b1X = 210;
 let b1Y = 450;
@@ -503,12 +503,18 @@ function levelOne() {
   push();
   // character
   fill(0, 0, 0);
-  rect(p1X, p1Y, pWidth, pHeight);
+  //rect(p1X, p1Y, pWidth, pHeight);
+  image(alienFront, p1X, p1Y, pWidth, pHeight);
   pop();
 
   if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
-isGameActive=false;
-}}
+    isGameActive = false;
+  }
+
+  image(gear, 1080, 270, 40, 40);
+  image(gear, 250, 400, 40, 40);
+  image(gear, 600, 500, 40, 40);
+}
 
 function levelTwo() {
   background(178, 194, 131);
@@ -678,6 +684,12 @@ function levelThree() {
   rect(p1X, p1Y, pWidth, pHeight);
   pop();
 }
+
+function preload() {
+  gear = loadImage("images/gear.png");
+  alienFront = loadImage("images/alienFront.png");
+}
+
 //////////GRAVITY///////////////
 function gravity() {
   if (p1Y >= minHeight && jump === false) {
