@@ -5,13 +5,13 @@ let direction = 1; //forse of gravity in the y direction
 let velocity = 2; // the speed of character
 let jumpPower = 11; //how high character jumps
 let fallingSpeed = 4; //equal to velocity
-let minHeight = 490; // height of ground
+let minHeight = 455; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
 //////////////
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
-let p1Y = 490;
+let p1Y = 455;
 let pWidth = 50;
 let pHeight = 95;
 
@@ -470,32 +470,32 @@ function levelOne() {
   ///////////////
 
   //jumping on the first box on the left
-  if (p1X >= 190 && p1X <= 450 && p1Y >= 390 && p1Y <= 480 && jump === false) {
-    p1Y = 390; // don't fall through
+  if (p1X >= 190 && p1X <= 450 && p1Y >= 355 && p1Y <= 445 && jump === false) {
+    p1Y = 355; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the top right small box
-  if (p1X >= 500 && p1X <= 580 && p1Y >= 290 && p1Y <= 320 && jump === false) {
-    p1Y = 290; // don't fall through
+  if (p1X >= 500 && p1X <= 580 && p1Y >= 255 && p1Y <= 285 && jump === false) {
+    p1Y = 255; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the top right big box
-  if (p1X >= 560 && p1X <= 1160 && p1Y >= 260 && p1Y <= 320 && jump === false) {
-    p1Y = 260; // don't fall through
+  if (p1X >= 560 && p1X <= 1160 && p1Y >= 225 && p1Y <= 285 && jump === false) {
+    p1Y = 225; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the small floating box on top right
-  if (p1X >= 740 && p1X <= 840 && p1Y >= 210 && p1Y <= 230 && jump === false) {
-    p1Y = 210; // don't fall through
+  if (p1X >= 740 && p1X <= 840 && p1Y >= 175 && p1Y <= 195 && jump === false) {
+    p1Y = 175; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the small floating box on bottom right
-  if (p1X >= 730 && p1X <= 820 && p1Y >= 450 && p1Y <= 470 && jump === false) {
-    p1Y = 450; // don't fall through
+  if (p1X >= 730 && p1X <= 820 && p1Y >= 415 && p1Y <= 445 && jump === false) {
+    p1Y = 415; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -529,11 +529,11 @@ function levelTwo() {
   if (
     p1X >= 200 &&
     p1X <= 350 &&
-    p1Y >= 440 &&
+    p1Y >= 405 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 405; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -541,11 +541,11 @@ function levelTwo() {
   if (
     p1X >= 330 &&
     p1X <= 420 &&
-    p1Y >= 380 &&
+    p1Y >= 345 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 345; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -553,24 +553,24 @@ function levelTwo() {
   if (
     p1X >= 460 &&
     p1X <= 520 &&
-    p1Y >= 320 &&
+    p1Y >= 285 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 285; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
 
   //jumping on the fourth box from the bottom
   if (
-    p1X >= 520 &&
+    p1X >= 500 &&
     p1X <= 600 &&
-    p1Y >= 280 &&
+    p1Y >= 245 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 245; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -579,29 +579,29 @@ function levelTwo() {
   if (
     p1X >= 600 &&
     p1X <= 770 &&
-    p1Y >= 370 &&
+    p1Y >= 335 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 335; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the box floating on the bottom right
-  if (p1X >= 815 && p1X <= 925 && p1Y >= 430 && p1Y <= 480 && jump === false) {
-    p1Y = p1Y; // don't fall through
+  if (p1X >= 815 && p1X <= 925 && p1Y >= 395 && p1Y <= 445 && jump === false) {
+    p1Y = 395; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the first box from the right on the top
-  if (p1X >= 830 && p1X <= 1160 && p1Y >= 160 && p1Y <= 240 && jump === false) {
-    p1Y = p1Y; // don't fall through
+  if (p1X >= 830 && p1X <= 1160 && p1Y >= 125 && p1Y <= 205 && jump === false) {
+    p1Y = 125; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the second box from the right on the top
-  if (p1X >= 620 && p1X <= 850 && p1Y >= 210 && p1Y <= 240 && jump === false) {
-    p1Y = p1Y; // don't fall through
+  if (p1X >= 620 && p1X <= 850 && p1Y >= 175 && p1Y <= 205 && jump === false) {
+    p1Y = 175; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -609,7 +609,8 @@ function levelTwo() {
   push();
   // character
   fill(0, 0, 0);
-  rect(p1X, p1Y, pWidth, pHeight);
+  // rect(p1X, p1Y, pWidth, pHeight);
+  image(alienFront, p1X, p1Y, pWidth, pHeight);
   pop();
 }
 
@@ -630,8 +631,8 @@ function levelThree() {
   doorThree(0, 0);
   ///////////////
   //jumping on the box on the left top
-  if (p1X >= 0 && p1X <= 330 && p1Y >= 250 && p1Y <= 300 && jump === false) {
-    p1Y = p1Y; // don't fall through
+  if (p1X >= 0 && p1X <= 330 && p1Y >= 215 && p1Y <= 265 && jump === false) {
+    p1Y = 215; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -639,11 +640,11 @@ function levelThree() {
   if (
     p1X >= 290 &&
     p1X <= 400 &&
-    p1Y >= 420 &&
+    p1Y >= 385 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 385; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -651,11 +652,11 @@ function levelThree() {
   if (
     p1X >= 380 &&
     p1X <= 600 &&
-    p1Y >= 340 &&
+    p1Y >= 305 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 305; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -663,17 +664,17 @@ function levelThree() {
   if (
     p1X >= 630 &&
     p1X <= 750 &&
-    p1Y >= 410 &&
+    p1Y >= 375 &&
     p1Y <= minHeight &&
     jump === false
   ) {
-    p1Y = p1Y; // don't fall through
+    p1Y = 375; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the small floating box on the right
-  if (p1X >= 800 && p1X <= 1000 && p1Y >= 340 && p1Y <= 380 && jump === false) {
-    p1Y = p1Y; // don't fall through
+  if (p1X >= 800 && p1X <= 1000 && p1Y >= 305 && p1Y <= 345 && jump === false) {
+    p1Y = 305; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
@@ -681,7 +682,8 @@ function levelThree() {
   push();
   // character
   fill(255, 255, 255);
-  rect(p1X, p1Y, pWidth, pHeight);
+  image(alienFront, p1X, p1Y, pWidth, pHeight);
+  // rect(p1X, p1Y, pWidth, pHeight);
   pop();
 }
 
