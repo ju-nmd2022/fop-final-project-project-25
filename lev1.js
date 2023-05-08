@@ -20,8 +20,38 @@ let b1Y = 450;
 let bWidth = 240;
 let bHeight = 30;
 
+////////////// Objectives in levels ////////////////
+let gearsLVL1 = [];
+
+function initializeGameLogic() {
+  gearsLVL1.push({
+    image: "images/gear.png",
+    positionX: 1080,
+    positionY: 270,
+  });
+  gearsLVL1.push({
+    image: "images/gear.png",
+    positionX: 250,
+    positionY: 400,
+  });
+  gearsLVL1.push({
+    image: "images/gear.png",
+    positionX: 600,
+    positionY: 500,
+  });
+}
+
 function setup() {
   createCanvas(1200, 600);
+  initializeGameLogic();
+}
+
+function showScore() {
+  push();
+  stroke(20);
+  noFill();
+  text(gearsLVL1.length, 60, 70);
+  pop();
 }
 
 function obstaclesOne(x, y) {
@@ -195,9 +225,9 @@ function levelOne() {
     isGameActive = false;
   }
 
-  image(gear, 1080, 270, 40, 40);
-  image(gear, 250, 400, 40, 40);
-  image(gear, 600, 500, 40, 40);
+  for (let currentGear of gearsLVL1) {
+    image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
+  }
 }
 
 function gravity() {
@@ -224,6 +254,19 @@ function gravity() {
   }
 }
 
+function checkCollision() {
+  for (let gear of gearsLVL1) {
+    if (
+      p1X >= gear.positionX &&
+      p1X <= gear.positionX + 40 &&
+      p1Y + pHeight >= gear.positionY &&
+      p1Y + pHeight <= gear.positionY + 55
+    ) {
+      gearsLVL1.splice(gearsLVL1.indexOf(gear), 1);
+    }
+  }
+}
+
 function keyPressed() {
   if (keyIsDown(37)) {
     p1X = p1X - 5; //move left
@@ -236,16 +279,27 @@ function keyPressed() {
   } else {
     jump = false;
   }
+
+  checkCollision();
 }
 
 function preload() {
+  let alienRight = [];
+  let alienLeft = [];
+
   gear = loadImage("images/gear.png");
   alienFront = loadImage("images/alienFront.png");
+  alienRight[0] = loadImage("images/alienRight1.png");
+  alienRight[1] = loadImage("images/alienRight2.png");
+  alienLeft[0] = loadImage("images/alienLeft1.png");
+  alienLeft[1] = loadImage("images/alienLeft2.png");
 }
 
 function draw() {
   levelOne();
   keyPressed();
   gravity();
+  showScore();
   //call functions
+  //image(aliens[0], 25, 25);
 }
