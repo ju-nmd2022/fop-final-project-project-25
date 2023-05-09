@@ -1,6 +1,8 @@
 //we have watched this playlist of video tutorials https://youtu.be/FZlpuQeCvlk
 let stage = 0;
 let jump = false;
+let characterState = false; // FALSE = idle, TRUE = walking
+let walkingDirection = true; // TRUE = right, FALSE = left
 let direction = 1; //forse of gravity in the y direction
 let velocity = 2; // the speed of character
 let jumpPower = 11; //how high character jumps
@@ -14,7 +16,7 @@ let p1X = 100; //position X for player
 let p1Y = 455;
 let pWidth = 50;
 let pHeight = 95;
-
+/////////////
 let b1X = 210;
 let b1Y = 450;
 let bWidth = 240;
@@ -22,6 +24,8 @@ let bHeight = 30;
 
 ////////////// Objectives in levels ////////////////
 let gearsLVL1 = [];
+let alienRight = [];
+let alienLeft = [];
 
 function initializeGameLogic() {
   gearsLVL1.push({
@@ -50,7 +54,7 @@ function showScore() {
   push();
   stroke(20);
   noFill();
-  text(gearsLVL1.length, 60, 70);
+  text(3 - gearsLVL1.length, 60, 70);
   pop();
 }
 
@@ -218,7 +222,15 @@ function levelOne() {
   // character
   fill(0, 0, 0);
   //rect(p1X, p1Y, pWidth, pHeight);
-  image(alienFront, p1X, p1Y, pWidth, pHeight);
+  if (characterState) {
+    if (walkingDirection) {
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+    } else {
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+    }
+  } else {
+    image(alienFront, p1X, p1Y, pWidth, pHeight);
+  }
   pop();
 
   if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
@@ -270,8 +282,12 @@ function checkCollision() {
 function keyPressed() {
   if (keyIsDown(37)) {
     p1X = p1X - 5; //move left
+    characterState = true;
+    walkingDirection = false;
   } else if (keyIsDown(39)) {
     p1X = p1X + 5; // move right
+    characterState = true;
+    walkingDirection = true;
   }
 
   if (keyIsDown(38)) {
@@ -283,13 +299,14 @@ function keyPressed() {
   checkCollision();
 }
 
-function preload() {
-  let alienRight = [];
-  let alienLeft = [];
+function keyReleased() {
+  characterState = false;
+}
 
+function preload() {
   gear = loadImage("images/gear.png");
   alienFront = loadImage("images/alienFront.png");
-  alienRight[0] = loadImage("images/alienRight1.png");
+  alienRight[0] = loadImage("images/alienRightWalkGif.gif");
   alienRight[1] = loadImage("images/alienRight2.png");
   alienLeft[0] = loadImage("images/alienLeft1.png");
   alienLeft[1] = loadImage("images/alienLeft2.png");
@@ -300,6 +317,4 @@ function draw() {
   keyPressed();
   gravity();
   showScore();
-  //call functions
-  //image(aliens[0], 25, 25);
 }
