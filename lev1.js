@@ -4,9 +4,9 @@ let jump = false;
 let characterState = false; // FALSE = idle, TRUE = walking
 let walkingDirection = true; // TRUE = right, FALSE = left
 let direction = 1; //forse of gravity in the y direction
-let velocity = 2; // the speed of character
+let velocity = 4; // the speed of character
 let jumpPower = 11; //how high character jumps
-let fallingSpeed = 4; //equal to velocity
+let fallingSpeed = 6; //equal to velocity
 let minHeight = 455; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
@@ -306,10 +306,9 @@ function keyReleased() {
 function preload() {
   gear = loadImage("images/gear.png");
   alienFront = loadImage("images/alienFront.png");
-  alienRight[0] = loadImage("images/alienRightWalkGif.gif");
-  alienRight[1] = loadImage("images/alienRight2.png");
-  alienLeft[0] = loadImage("images/alienLeft1.png");
-  alienLeft[1] = loadImage("images/alienLeft2.png");
+  alienRight[0] = loadImage("images/alienWalkingRight.gif");
+
+  alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
 }
 
 function draw() {
