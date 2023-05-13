@@ -48,34 +48,34 @@ function initializeGameLogic() {
   ////////////////////////////
   gearsLVL2.push({
     image: "images/gear.png",
-    positionX: 1080,
-    positionY: 270,
+    positionX: 365,
+    positionY: 390,
   });
   gearsLVL2.push({
     image: "images/gear.png",
-    positionX: 250,
-    positionY: 400,
+    positionX: 1050,
+    positionY: 170,
   });
   gearsLVL2.push({
     image: "images/gear.png",
-    positionX: 600,
-    positionY: 500,
+    positionX: 700,
+    positionY: 380,
   });
   ////////////////////////////
   gearsLVL3.push({
     image: "images/gear.png",
-    positionX: 1080,
-    positionY: 270,
+    positionX: 950,
+    positionY: 350,
   });
   gearsLVL3.push({
     image: "images/gear.png",
-    positionX: 250,
-    positionY: 400,
+    positionX: 70,
+    positionY: 260,
   });
   gearsLVL3.push({
     image: "images/gear.png",
-    positionX: 600,
-    positionY: 500,
+    positionX: 540,
+    positionY: 350,
   });
 }
 
