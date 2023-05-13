@@ -1,6 +1,8 @@
 //we have watched this playlist of video tutorials https://youtu.be/FZlpuQeCvlk
 let stage = 0;
 let jump = false;
+let characterState = false; // FALSE = idle, TRUE = walking
+let walkingDirection = true; // TRUE = right, FALSE = left
 let direction = 1; //forse of gravity in the y direction
 let velocity = 2; // the speed of character
 let jumpPower = 11; //how high character jumps
@@ -20,12 +22,70 @@ let b1Y = 450;
 let bWidth = 240;
 let bHeight = 30;
 
+////////////// Objectives in levels ////////////////
+let gearsLVL1 = [];
+let gearsLVL2 = [];
+let gearsLVL3 = [];
+let alienRight = [];
+let alienLeft = [];
+
+function initializeGameLogic() {
+  gearsLVL1.push({
+    image: "images/gear.png",
+    positionX: 1080,
+    positionY: 270,
+  });
+  gearsLVL1.push({
+    image: "images/gear.png",
+    positionX: 250,
+    positionY: 400,
+  });
+  gearsLVL1.push({
+    image: "images/gear.png",
+    positionX: 600,
+    positionY: 500,
+  });
+  ////////////////////////////
+  gearsLVL2.push({
+    image: "images/gear.png",
+    positionX: 1080,
+    positionY: 270,
+  });
+  gearsLVL2.push({
+    image: "images/gear.png",
+    positionX: 250,
+    positionY: 400,
+  });
+  gearsLVL2.push({
+    image: "images/gear.png",
+    positionX: 600,
+    positionY: 500,
+  });
+  ////////////////////////////
+  gearsLVL3.push({
+    image: "images/gear.png",
+    positionX: 1080,
+    positionY: 270,
+  });
+  gearsLVL3.push({
+    image: "images/gear.png",
+    positionX: 250,
+    positionY: 400,
+  });
+  gearsLVL3.push({
+    image: "images/gear.png",
+    positionX: 600,
+    positionY: 500,
+  });
+}
+
 //////STATE OF THE GAME/////////
 let isGameActive = true;
 let state = "levelOne";
 
 function setup() {
   createCanvas(1200, 600);
+  initializeGameLogic();
   // start button
   startButton = createButton("START");
   startButton.position(530, 320);
@@ -56,6 +116,31 @@ function setup() {
   failButton.size(200, 30);
   failButton.style("font-size", "30px");
   failButton.hide();
+}
+
+////////////////////SCORES/////////////////////
+function showScoreLevel1() {
+  push();
+  stroke(20);
+  noFill();
+  text(3 - gearsLVL1.length, 60, 70);
+  pop();
+}
+
+function showScoreLevel2() {
+  push();
+  stroke(20);
+  noFill();
+  text(3 - gearsLVL2.length, 60, 70);
+  pop();
+}
+
+function showScoreLevel3() {
+  push();
+  stroke(20);
+  noFill();
+  text(3 - gearsLVL3.length, 60, 70);
+  pop();
 }
 
 //////////////LEVELONE SCREEN////////////////
@@ -504,16 +589,24 @@ function levelOne() {
   // character
   fill(0, 0, 0);
   //rect(p1X, p1Y, pWidth, pHeight);
-  image(alienFront, p1X, p1Y, pWidth, pHeight);
+  if (characterState) {
+    if (walkingDirection) {
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+    } else {
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+    }
+  } else {
+    image(alienFront, p1X, p1Y, pWidth, pHeight);
+  }
   pop();
 
   if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
     isGameActive = false;
   }
 
-  image(gear, 1080, 270, 40, 40);
-  image(gear, 250, 400, 40, 40);
-  image(gear, 600, 500, 40, 40);
+  for (let currentGear of gearsLVL1) {
+    image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
+  }
 }
 
 function levelTwo() {
@@ -610,8 +703,24 @@ function levelTwo() {
   // character
   fill(0, 0, 0);
   // rect(p1X, p1Y, pWidth, pHeight);
-  image(alienFront, p1X, p1Y, pWidth, pHeight);
+  if (characterState) {
+    if (walkingDirection) {
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+    } else {
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+    }
+  } else {
+    image(alienFront, p1X, p1Y, pWidth, pHeight);
+  }
   pop();
+
+  if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
+    isGameActive = false;
+  }
+
+  for (let currentGear of gearsLVL2) {
+    image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
+  }
 }
 
 function levelThree() {
@@ -682,14 +791,62 @@ function levelThree() {
   push();
   // character
   fill(255, 255, 255);
-  image(alienFront, p1X, p1Y, pWidth, pHeight);
   // rect(p1X, p1Y, pWidth, pHeight);
+  if (characterState) {
+    if (walkingDirection) {
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+    } else {
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+    }
+  } else {
+    image(alienFront, p1X, p1Y, pWidth, pHeight);
+  }
   pop();
+
+  if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
+    isGameActive = false;
+  }
+
+  for (let currentGear of gearsLVL3) {
+    image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
+  }
 }
 
-function preload() {
-  gear = loadImage("images/gear.png");
-  alienFront = loadImage("images/alienFront.png");
+////////////////////COLLISION//////////////////////
+
+function checkCollision() {
+  for (let gear of gearsLVL1) {
+    if (
+      p1X >= gear.positionX &&
+      p1X <= gear.positionX + 40 &&
+      p1Y + pHeight >= gear.positionY &&
+      p1Y + pHeight <= gear.positionY + 55
+    ) {
+      gearsLVL1.splice(gearsLVL1.indexOf(gear), 1);
+    }
+  }
+  ///////////////////
+  for (let gear of gearsLVL2) {
+    if (
+      p1X >= gear.positionX &&
+      p1X <= gear.positionX + 40 &&
+      p1Y + pHeight >= gear.positionY &&
+      p1Y + pHeight <= gear.positionY + 55
+    ) {
+      gearsLVL2.splice(gearsLVL2.indexOf(gear), 1);
+    }
+  }
+  ///////////////////
+  for (let gear of gearsLVL3) {
+    if (
+      p1X >= gear.positionX &&
+      p1X <= gear.positionX + 40 &&
+      p1Y + pHeight >= gear.positionY &&
+      p1Y + pHeight <= gear.positionY + 55
+    ) {
+      gearsLVL3.splice(gearsLVL3.indexOf(gear), 1);
+    }
+  }
 }
 
 //////////GRAVITY///////////////
@@ -720,8 +877,12 @@ function gravity() {
 function keyPressed() {
   if (keyIsDown(37)) {
     p1X = p1X - 5; //move left
+    characterState = true;
+    walkingDirection = false;
   } else if (keyIsDown(39)) {
     p1X = p1X + 5; // move right
+    characterState = true;
+    walkingDirection = true;
   }
 
   if (keyIsDown(38)) {
@@ -729,6 +890,20 @@ function keyPressed() {
   } else {
     jump = false;
   }
+
+  checkCollision();
+}
+
+function keyReleased() {
+  characterState = false;
+}
+
+function preload() {
+  gear = loadImage("images/gear.png");
+  alienFront = loadImage("images/alienFront.png");
+  alienRight[0] = loadImage("images/alienWalkingRight.gif");
+
+  alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
 }
 //////////////FUNCTION MOUSECLICKED////////////////
 
@@ -767,4 +942,7 @@ function draw() {
 
   keyPressed();
   gravity();
+  showScoreLevel1();
+  showScoreLevel2();
+  showScoreLevel3();
 }
