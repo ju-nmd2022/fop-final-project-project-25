@@ -477,6 +477,7 @@ function doorThree(x, y) {
 
 //////////////WIN SCREEN////////////////
 function winScreen() {
+  background(0, 0, 0);
   // text: YOU WIN!
   fill(255, 255, 255);
   textSize(90);
@@ -492,18 +493,22 @@ function winScreen() {
   fill(255, 255, 255);
   textSize(25);
   text("YOU MADE THE TIME MACHINE WORK AGAIN!", 310, 220, 700, 100);
+  startButton.hide();
 }
 //////////////GAMEOVER SCREEN////////////////
-function gameOverScreen() {
+function failScreen() {
+  background(0, 0, 0);
   // text: GAME OVER
   fill(255, 255, 255);
   textSize(90);
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("GAME OVER...", 620, 100);
+  startButton.hide();
 }
 //////////////START SCREEN////////////////
 function startScreen() {
+  background(0, 0, 0);
   // text: timemachine
   fill(255, 255, 255);
   textSize(90);
@@ -518,24 +523,9 @@ function startScreen() {
   fill(255, 255, 255);
   textSize(15);
   text("Instructions", 900, 520, 100, 100);
+  startButton.show();
 }
-//////////////START SCREEN////////////////
-function startScreen() {
-  // text: timemachine
-  fill(255, 255, 255);
-  textSize(90);
-  // textFont(Copperplate);
-  textAlign(CENTER, TOP);
-  text("TIMEMACHINE", 590, 100);
-  // text: history
-  fill(255, 255, 255);
-  textSize(15);
-  text("History", 915, 500, 100, 100);
-  // text: instructions
-  fill(255, 255, 255);
-  textSize(15);
-  text("Instructions", 900, 520, 100, 100);
-}
+
 //////////////LEVELS FUNCTIONS/////////////////////
 function levelOne() {
   background(255, 252, 186);
@@ -552,6 +542,7 @@ function levelOne() {
   borderOne(0, 0);
   obstaclesOne(0, 0);
   doorOne(0, 0);
+  startButton.hide();
   ///////////////
 
   //jumping on the first box on the left
@@ -617,6 +608,7 @@ function levelTwo() {
   borderTwo(0, 0);
   obstaclesTwo(0, 0);
   doorTwo(0, 0);
+  startButton.hide();
 
   //jumping on the first box from the left
   if (
@@ -728,6 +720,7 @@ function levelThree() {
   noStroke();
   background(0, 0, 0);
   liquidThree(0, 0);
+  startButton.hide();
   ///////////////
   //box 1
   fill(0, 0, 0);
@@ -936,7 +929,7 @@ function draw() {
     levelThree();
   } else if (isGameActive === false && state === "win") {
     winScreen();
-  } else if (isGameActive === false && state === "levelOne") {
+  } else if (isGameActive === false && state === "fail") {
     failScreen();
   }
 
