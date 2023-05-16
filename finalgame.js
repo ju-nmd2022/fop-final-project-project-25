@@ -301,6 +301,17 @@ function liquidTwo(x, y) {
 
   pop();
 }
+function liquidTwo(x, y) {
+  fill(255, random(140, 150), 0);
+  push();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "red";
+  noStroke();
+  liquidLVL1.push(new Liquid(x + 200, y + 550, 260, 30)); // liquid 1 on bottom left
+  liquidLVL1.push(new Liquid(x + 680, y + 550, 190, 30)); // liquid 2 on the bottom right
+  liquidLVL1.push(new Liquid(x + 700, y + 320, 200, 30)); // liquid 3 on top right
+  pop();
+}
 
 function borderTwo(x, y) {
   strokeWeight(1);
