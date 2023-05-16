@@ -29,6 +29,11 @@ let gearsLVL3 = [];
 let alienRight = [];
 let alienLeft = [];
 
+/////////////liquids in levels///////////////
+let liquidLVL1 = [];
+let liquidLVL2 = [];
+let liquidLVL3 = [];
+
 function initializeGameLogic() {
   gearsLVL1.push({
     image: "images/gear.png",
@@ -117,7 +122,19 @@ function setup() {
   failButton.style("font-size", "30px");
   failButton.hide();
 }
+////////////////LIQUID'S CONSTRUCTOR CLASS///////////////
+class Liquid {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
+  display() {
+    rect(this.x, this.y, this.width, this.height);
+  }
+}
 ////////////////////SCORES/////////////////////
 function showScoreLevel1() {
   push();
@@ -161,15 +178,14 @@ function obstaclesOne(x, y) {
 }
 
 function liquidOne(x, y) {
-  // liquid
   fill(255, random(140, 150), 0);
   push();
-  noStroke();
   drawingContext.shadowBlur = 5;
   drawingContext.shadowColor = "red";
-  rect(x + 700, y + 325, 200, 30);
-  rect(x + 180, y + 555, 290, 30);
-  rect(x + 680, y + 555, 230, 30);
+  noStroke();
+  liquidLVL1.push(new Liquid(x + 200, y + 550, 260, 30)); // liquid 1 on bottom left
+  liquidLVL1.push(new Liquid(x + 680, y + 550, 190, 30)); // liquid 2 on the bottom right
+  liquidLVL1.push(new Liquid(x + 700, y + 320, 200, 30)); // liquid 3 on top right
   pop();
 }
 
@@ -530,6 +546,10 @@ function startScreen() {
 function levelOne() {
   background(255, 252, 186);
   liquidOne(0, 0);
+  //let the liquids display
+  for (let i = 0; i < liquidLVL1.length; i++) {
+    liquidLVL1[i].display();
+  }
   ///////////////
   push();
   //box 1
@@ -808,6 +828,7 @@ function levelThree() {
 ////////////////////COLLISION//////////////////////
 
 function checkCollision() {
+  ///////////////////COLLISION FOR GEARS/////////////
   for (let gear of gearsLVL1) {
     if (
       p1X >= gear.positionX &&
@@ -840,6 +861,20 @@ function checkCollision() {
       gearsLVL3.splice(gearsLVL3.indexOf(gear), 1);
     }
   }
+  ///////////////COLLISION FOR LIQUIDS//////////////////
+  for (let i = 0; i < liquidLVL1.length; i++) {
+    let liquid = liquidLVL1[i];
+    if (
+      p1X >= liquid.x &&
+      p1X <= liquid.x + 40 &&
+      p1Y + pHeight >= liquid.y &&
+      p1Y + pHeight <= liquid.y + 55
+    ) {
+      // Collision detected, end the game
+      console.log("gameover");
+    }
+  }
+  ///////////////
 }
 
 //////////GRAVITY///////////////
@@ -883,8 +918,6 @@ function keyPressed() {
   } else {
     jump = false;
   }
-
-  checkCollision();
 }
 
 function keyReleased() {
@@ -935,6 +968,7 @@ function draw() {
 
   keyPressed();
   gravity();
+  checkCollision();
   showScoreLevel1();
   showScoreLevel2();
   showScoreLevel3();

@@ -53,20 +53,19 @@ function initializeGameLogic() {
 function setup() {
   createCanvas(1200, 600);
   initializeGameLogic();
-  
 }
 class Liquid {
-    constructor(x, y, width, height) {
-      this.x = x;
-      this.y = y;
-      this.width = width;
-      this.height = height;
-    }
-  
-    display() {
-      rect(this.x, this.y, this.width, this.height);
-    }
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
+
+  display() {
+    rect(this.x, this.y, this.width, this.height);
+  }
+}
 
 function showScore() {
   push();
@@ -76,17 +75,17 @@ function showScore() {
   pop();
 }
 function liquidOne(x, y) {
-    fill(255, random(140, 150), 0);
-    push();
-     drawingContext.shadowBlur = 5;
-    drawingContext.shadowColor = "red";
-    noStroke();
-    liquidLVL1.push(new Liquid(x+200, y+ 555, 260, 30)); // liquid 1 on bottom left
-    liquidLVL1.push(new Liquid(x+680,y+555, 190, 30)); // liquid 2 on the bottom right
-    liquidLVL1.push(new Liquid(x+700, y+325, 200, 30)); // liquid 3 on top right
-    pop();
-  }
-  
+  fill(255, random(140, 150), 0);
+  push();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "red";
+  noStroke();
+  liquidLVL1.push(new Liquid(200, 550, 260, 40)); // liquid 1 on bottom left
+  liquidLVL1.push(new Liquid(680, 550, 190, 30)); // liquid 2 on the bottom right
+  liquidLVL1.push(new Liquid(700, 320, 200, 30)); // liquid 3 on top right
+  pop();
+}
+
 function obstaclesOne(x, y) {
   push();
   fill(225, 193, 110);
@@ -185,7 +184,6 @@ function doorOne(x, y) {
   rect(x + 1030, y + 460, 70, 90);
   pop();
 }
-
 
 function levelOne() {
   background(255, 252, 186);
@@ -301,13 +299,13 @@ function checkCollision() {
   for (let i = 0; i < liquidLVL1.length; i++) {
     let liquid = liquidLVL1[i];
     if (
-      p1X > liquid.x &&
-      p1X < liquid.x + liquid.width &&
-      p1Y > liquid.y &&
-      p1Y < liquid.y + liquid.height
+        p1X >= liquid.x &&
+        p1X <= liquid.x + 40 &&
+        p1Y + pHeight >= liquid.y &&
+        p1Y + pHeight <= liquid.y + 55
     ) {
       // Collision detected, end the game
-      state = fail;
+      console.log("hey");
     }
   }
 }
