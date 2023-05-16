@@ -20,6 +20,7 @@ let pHeight = 60;
 let gearsLVL2 = [];
 let alienRight = [];
 let alienLeft = [];
+////////////////////////////////////////////////////
 
 function initializeGameLogic() {
   gearsLVL2.push({

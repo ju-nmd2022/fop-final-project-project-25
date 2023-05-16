@@ -29,6 +29,10 @@ let gearsLVL3 = [];
 let alienRight = [];
 let alienLeft = [];
 
+/////////////obstacles in levels///////////////
+let obstaclesLVL1 = [];
+let obstaclesLVL2 = [];
+
 /////////////liquids in levels///////////////
 let liquidLVL1 = [];
 let liquidLVL2 = [];
@@ -84,12 +88,27 @@ function initializeGameLogic() {
   });
 }
 
+function obstaclesSetup() {
+  // Create obstacles and add them to the array
+  obstaclesLVL1.push(new Obstacle(1000, 300, 40, 20)); // Obstacle 1
+  obstaclesLVL1.push(new Obstacle(330, 430, 40, 20)); // Obstacle 2
+  obstaclesLVL1.push(new Obstacle(570, 380, 40, 40)); // Obstacle 3
+  obstaclesLVL1.push(new Obstacle(550, 380, 20, 20)); // Obstacle 4
+  ///////////////////////
+  obstaclesLVL2.push(new Obstacle(870, 300, 40, 40)); // Obstacle 1
+  obstaclesLVL2.push(new Obstacle(310, 480, 40, 20)); // Obstacle 2
+  obstaclesLVL2.push(new Obstacle(720, 250, 40, 20)); // Obstacle 3
+  obstaclesLVL2.push(new Obstacle(850, 300, 20, 20)); // Obstacle 4
+  ///////////////////////
+}
+
 //////STATE OF THE GAME/////////
 let isGameActive = true;
 let state = "levelThree";
 
 function setup() {
   createCanvas(1200, 600);
+  obstaclesSetup();
   initializeGameLogic();
   // start button
   startButton = createButton("START");
@@ -122,6 +141,22 @@ function setup() {
   failButton.style("font-size", "30px");
   failButton.hide();
 }
+
+///////////////OBSTACLE CLASS/////////////////
+
+class Obstacle {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
+
+  display() {
+    rect(this.x, this.y, this.width, this.height);
+  }
+}
+
 ////////////////LIQUID'S CONSTRUCTOR CLASS///////////////
 class Liquid {
   constructor(x, y, width, height) {
@@ -612,6 +647,10 @@ function levelOne() {
   for (let currentGear of gearsLVL1) {
     image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
   }
+
+  for (let i = 0; i < obstaclesLVL1.length; i++) {
+    obstaclesLVL1[i].display();
+  }
 }
 
 function levelTwo() {
@@ -730,6 +769,10 @@ function levelTwo() {
 
   for (let currentGear of gearsLVL2) {
     image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
+  }
+
+  for (let i = 0; i < obstaclesLVL2.length; i++) {
+    obstaclesLVL2[i].display();
   }
 }
 
@@ -861,6 +904,33 @@ function checkCollision() {
       p1Y + pHeight <= gear.positionY + 55
     ) {
       gearsLVL3.splice(gearsLVL3.indexOf(gear), 1);
+    }
+  }
+
+  /////////checking for collision with obstacles////////
+  for (let i = 0; i < obstaclesLVL1.length; i++) {
+    let obstacle = obstaclesLVL1[i];
+    if (
+      p1X >= obstacle.x &&
+      p1X <= obstacle.x + 40 &&
+      p1Y + pHeight >= obstacle.y &&
+      p1Y + pHeight <= obstacle.y + 55
+    ) {
+      // Collision detected, end the game
+      console.log("Game over!");
+    }
+  }
+  /////////checking for collision with obstacles////////
+  for (let i = 0; i < obstaclesLVL2.length; i++) {
+    let obstacle = obstaclesLVL2[i];
+    if (
+      p1X >= obstacle.x &&
+      p1X <= obstacle.x + 40 &&
+      p1Y + pHeight >= obstacle.y &&
+      p1Y + pHeight <= obstacle.y + 55
+    ) {
+      // Collision detected, end the game
+      console.log("Game over!");
     }
   }
   ///////////////COLLISION FOR LIQUIDS//////////////////
