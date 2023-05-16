@@ -32,6 +32,7 @@ let alienLeft = [];
 /////////////obstacles in levels///////////////
 let obstaclesLVL1 = [];
 let obstaclesLVL2 = [];
+let obstaclesLVL3 = [];
 
 /////////////liquids in levels///////////////
 let liquidLVL1 = [];
@@ -100,11 +101,13 @@ function obstaclesSetup() {
   obstaclesLVL2.push(new Obstacle(720, 250, 40, 20)); // Obstacle 3
   obstaclesLVL2.push(new Obstacle(850, 300, 20, 20)); // Obstacle 4
   ///////////////////////
+  obstaclesLVL3.push(new Obstacle(880, 380, 40, 20)); // Obstacle 1
+  obstaclesLVL3.push(new Obstacle(480, 380, 40, 20)); // Obstacle 2
 }
 
 //////STATE OF THE GAME/////////
 let isGameActive = true;
-let state = "levelThree";
+let state = "levelOne";
 
 function setup() {
   createCanvas(1200, 600);
@@ -440,9 +443,9 @@ function liquidThree(x, y) {
   noStroke();
   drawingContext.shadowBlur = 5;
   drawingContext.shadowColor = "orange";
-  liquidLVL3.push(new Liquid(240, 550, 540, 30)); // liquid 1 on all bottom 
+  liquidLVL3.push(new Liquid(240, 550, 540, 30)); // liquid 1 on all bottom
   liquidLVL3.push(new Liquid(130, 310, 70, 30)); // liquid 2 on the bottom right
-  
+
   pop();
 }
 
@@ -868,6 +871,10 @@ function levelThree() {
   for (let currentGear of gearsLVL3) {
     image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
   }
+
+  for (let i = 0; i < obstaclesLVL3.length; i++) {
+    obstaclesLVL3[i].display();
+  }
 }
 
 ////////////////////COLLISION//////////////////////
@@ -920,9 +927,23 @@ function checkCollision() {
       console.log("Game over!");
     }
   }
-  /////////checking for collision with obstacles////////
+  ///////////////
   for (let i = 0; i < obstaclesLVL2.length; i++) {
     let obstacle = obstaclesLVL2[i];
+    if (
+      p1X >= obstacle.x &&
+      p1X <= obstacle.x + 40 &&
+      p1Y + pHeight >= obstacle.y &&
+      p1Y + pHeight <= obstacle.y + 55
+    ) {
+      // Collision detected, end the game
+      console.log("Game over!");
+    }
+  }
+
+  ///////////////
+  for (let i = 0; i < obstaclesLVL3.length; i++) {
+    let obstacle = obstaclesLVL3[i];
     if (
       p1X >= obstacle.x &&
       p1X <= obstacle.x + 40 &&
