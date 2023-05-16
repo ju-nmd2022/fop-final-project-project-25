@@ -86,7 +86,7 @@ function initializeGameLogic() {
 
 //////STATE OF THE GAME/////////
 let isGameActive = true;
-let state = "levelThree";
+let state = "levelOne";
 
 function setup() {
   createCanvas(1200, 600);
@@ -178,15 +178,17 @@ function obstaclesOne(x, y) {
 }
 
 function liquidOne(x, y) {
-  fill(255, random(140, 150), 0);
-  push();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "red";
-  noStroke();
-  liquidLVL1.push(new Liquid(x + 200, y + 550, 260, 30)); // liquid 1 on bottom left
-  liquidLVL1.push(new Liquid(x + 680, y + 550, 190, 30)); // liquid 2 on the bottom right
-  liquidLVL1.push(new Liquid(x + 700, y + 320, 200, 30)); // liquid 3 on top right
-  pop();
+  if ((state = "levelOne")) {
+    fill(255, random(140, 150), 0);
+    push();
+    drawingContext.shadowBlur = 5;
+    drawingContext.shadowColor = "red";
+    noStroke();
+    liquidLVL1.push(new Liquid(x + 200, y + 550, 260, 30)); // liquid 1 on bottom left
+    liquidLVL1.push(new Liquid(x + 680, y + 550, 190, 30)); // liquid 2 on the bottom right
+    liquidLVL1.push(new Liquid(x + 700, y + 320, 200, 30)); // liquid 3 on top right
+    pop();
+  }
 }
 
 function borderOne(x, y) {
@@ -289,16 +291,17 @@ function obstaclesTwo(x, y) {
 }
 
 function liquidTwo(x, y) {
-  fill(85, random(100, 110), 47);
-  push();
-  noStroke();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "green";
-  liquidLVL2.push(new Liquid(150, 550, 850, 30)); // liquid 1 on all the bottom
-  liquidLVL2.push(new Liquid(910, 220, 80, 30)); // liquid 2 on right top
-  pop();
+  if ((state = "levelTwo")) {
+    fill(85, random(100, 110), 47);
+    push();
+    noStroke();
+    drawingContext.shadowBlur = 5;
+    drawingContext.shadowColor = "green";
+    liquidLVL2.push(new Liquid(150, 550, 850, 30)); // liquid 1 on all the bottom
+    liquidLVL2.push(new Liquid(910, 220, 80, 30)); // liquid 2 on right top
+    pop();
+  }
 }
-
 function borderTwo(x, y) {
   strokeWeight(1);
   // border
@@ -400,15 +403,17 @@ function obstaclesThree(x, y) {
 }
 
 function liquidThree(x, y) {
-  fill(255, 215, 0);
-  push();
-  noStroke();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "orange";
-  liquidLVL3.push(new Liquid(240, 550, 540, 30)); // liquid 1 on all bottom 
-  liquidLVL3.push(new Liquid(130, 310, 70, 30)); // liquid 2 on the bottom right
-  
-  pop();
+  if ((state = "levelThree")) {
+    fill(255, 215, 0);
+    push();
+    noStroke();
+    drawingContext.shadowBlur = 5;
+    drawingContext.shadowColor = "orange";
+    liquidLVL3.push(new Liquid(240, 540, 540, 30)); // liquid 1 on all bottom
+    liquidLVL3.push(new Liquid(130, 310, 70, 30)); // liquid 2 on the bottom right
+
+    pop();
+  }
 }
 
 function borderThree(x, y) {
