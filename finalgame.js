@@ -1,5 +1,5 @@
 //we have watched this playlist of video tutorials https://youtu.be/FZlpuQeCvlk
-let stage = 0;
+
 let jump = false;
 let characterState = false; // FALSE = idle, TRUE = walking
 let walkingDirection = true; // TRUE = right, FALSE = left
@@ -11,6 +11,8 @@ let minHeight = 455; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
 //////////////
+let timer = 15;
+let countDown;
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
 let p1Y = 455;
@@ -95,11 +97,13 @@ function obstaclesSetup() {
   obstaclesLVL1.push(new Obstacle(330, 430, 40, 20)); // Obstacle 2
   obstaclesLVL1.push(new Obstacle(570, 380, 40, 40)); // Obstacle 3
   obstaclesLVL1.push(new Obstacle(550, 380, 20, 20)); // Obstacle 4
+
   ///////////////////////
   obstaclesLVL2.push(new Obstacle(870, 300, 40, 40)); // Obstacle 1
   obstaclesLVL2.push(new Obstacle(310, 480, 40, 20)); // Obstacle 2
   obstaclesLVL2.push(new Obstacle(720, 250, 40, 20)); // Obstacle 3
   obstaclesLVL2.push(new Obstacle(850, 300, 20, 20)); // Obstacle 4
+
   ///////////////////////
   obstaclesLVL3.push(new Obstacle(880, 380, 40, 20)); // Obstacle 1
   obstaclesLVL3.push(new Obstacle(480, 380, 40, 20)); // Obstacle 2
@@ -111,6 +115,7 @@ let state = "levelOne";
 
 function setup() {
   createCanvas(1200, 600);
+  frameRate(30);
   obstaclesSetup();
   initializeGameLogic();
   // start button
@@ -161,8 +166,6 @@ class Obstacle {
 
   display() {
     rect(this.x, this.y, this.width, this.height);
-
-    //aggiungi if siamo in questo livello allora
   }
 }
 
@@ -183,11 +186,12 @@ class Liquid {
     //   let liquids= liquidLVL1
     // }
 
-    fill(255, random(140, 150), 0);
     push();
+    fill(255, random(140, 150), 0);
     noStroke();
+    drawingContext.shadowBlur = 5;
     drawingContext.shadowColor = "red";
-    drawingContext.shadowBlur = 2;
+
     rect(this.x, this.y, this.width, this.height);
     pop();
   }
@@ -195,25 +199,31 @@ class Liquid {
 ////////////////////SCORES/////////////////////
 function showScoreLevel1() {
   push();
-  stroke(20);
-  noFill();
-  text(3 - gearsLVL1.length, 60, 70);
+  fill(0, 0, 0);
+  textSize(28);
+  noStroke();
+  textSize(20);
+  text("Gears collected: " + (3 - gearsLVL1.length), 158, 90);
   pop();
 }
 
 function showScoreLevel2() {
   push();
-  stroke(20);
-  noFill();
-  text(3 - gearsLVL2.length, 60, 70);
+  fill(0, 0, 0);
+  textSize(28);
+  noStroke();
+  textSize(20);
+  text("Gears collected: " + (3 - gearsLVL2.length), 60, 80);
   pop();
 }
 
 function showScoreLevel3() {
   push();
-  stroke(20);
-  noFill();
-  text(3 - gearsLVL3.length, 60, 70);
+  fill(255, 255, 255);
+  textSize(28);
+  noStroke();
+  textSize(20);
+  text("Gears collected: " + (3 - gearsLVL3.length), 60, 80);
   pop();
 }
 
@@ -545,8 +555,6 @@ function winScreen() {
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("YOU WIN!", 620, 100);
-  // if we add a timer then:
-  // text: time score
   fill(255, 255, 255);
   textSize(15);
   text("TIME SCORE:", 510, 420, 200, 100);
@@ -675,6 +683,8 @@ function levelOne() {
   for (let i = 0; i < obstaclesLVL1.length; i++) {
     obstaclesLVL1[i].display();
   }
+
+  showScoreLevel1();
 }
 
 function levelTwo() {
@@ -801,6 +811,7 @@ function levelTwo() {
   for (let i = 0; i < obstaclesLVL2.length; i++) {
     obstaclesLVL2[i].display();
   }
+  showScoreLevel2();
 }
 
 function levelThree() {
@@ -901,6 +912,7 @@ function levelThree() {
   for (let i = 0; i < obstaclesLVL3.length; i++) {
     obstaclesLVL3[i].display();
   }
+  showScoreLevel3();
 }
 
 ////////////////////COLLISION//////////////////////
@@ -1027,10 +1039,30 @@ function winPlay() {
 function failPlay() {
   state = "levelOne";
   isGameActive = true;
+  p1X = 100; //position X for player
+  p1Y = 455;
 }
 
 //////////////DRAW FUNCTION////////////////
 let walkingRight;
+
+function showTimer() {
+  textAlign(CENTER, CENTER);
+  push();
+  textSize(20);
+  fill(0, 0, 0);
+  text("Timer: " + timer, 120, 120);
+  noStroke();
+  pop();
+
+  if (frameCount % 30 == 0 && timer > 0) {
+    timer--;
+  }
+
+  if (timer == 0) {
+    failScreen();
+  }
+}
 
 function draw() {
   if (state === "start") {
@@ -1075,7 +1107,7 @@ function draw() {
           p1X >= obstacle.x &&
           p1X <= obstacle.x + obstacle.width - pWidth / 2 &&
           p1Y + pHeight >= obstacle.y &&
-          p1Y + pHeight <= obstacle.y -55 ) ||
+          p1Y + pHeight <= obstacle.y - 55) ||
         (walkingRight === true &&
           p1X >= obstacle.x - pWidth / 2 &&
           p1X <= obstacle.x + obstacle.width &&
@@ -1163,10 +1195,8 @@ function draw() {
     }
   }
 
+  showTimer();
   keyPressed();
   gravity();
   checkCollision();
-  showScoreLevel1();
-  showScoreLevel2();
-  showScoreLevel3();
 }
