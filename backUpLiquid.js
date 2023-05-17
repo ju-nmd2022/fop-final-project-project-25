@@ -869,45 +869,52 @@ function checkCollision() {
     }
   }
   ///////////////COLLISION FOR LIQUIDS//////////////////
-  /////////////LVL1
+  // Check collisions for liquids in level 1
+  // Check collisions for liquids in level 1
   for (let i = 0; i < liquidLVL1.length; i++) {
     let liquid = liquidLVL1[i];
-    if (
-      p1X >= liquid.x &&
-      p1X <= liquid.x + 40 &&
-      p1Y + pHeight >= liquid.y &&
-      p1Y + pHeight <= liquid.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("gameover");
+    if (collidesWithPlayer(p1X, p1Y, pWidth, pHeight, liquid)) {
+      console.log("Collided with liquid in level 1");
+      // End game or perform other actions
     }
   }
-  ///////////////LVL2
+
+  // Check collisions for liquids in level 2
   for (let i = 0; i < liquidLVL2.length; i++) {
     let liquid = liquidLVL2[i];
-    if (
-      p1X >= liquid.x &&
-      p1X <= liquid.x + 40 &&
-      p1Y + pHeight >= liquid.y &&
-      p1Y + pHeight <= liquid.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("gameover");
+    if (collidesWithPlayer(p1X, p1Y, pWidth, pHeight, liquid)) {
+      console.log("Collided with liquid in level 2");
+      // End game or perform other actions
     }
   }
-  ///////////////LVL3
+
+  // Check collisions for liquids in level 3
   for (let i = 0; i < liquidLVL3.length; i++) {
     let liquid = liquidLVL3[i];
-    if (
-      p1X >= liquid.x &&
-      p1X <= liquid.x + 40 &&
-      p1Y + pHeight >= liquid.y &&
-      p1Y + pHeight <= liquid.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("gameover");
+    if (collidesWithPlayer(p1X, p1Y, pWidth, pHeight, liquid)) {
+      console.log("Collided with liquid in level 3");
+      // End game or perform other actions
     }
   }
+}
+
+function collidesWithPlayer(p1X, p1Y, pWidth, pHeight, liquid) {
+  // Define bounding boxes for player character and liquid
+  let playerBox = { x: p1X, y: p1Y, width: pWidth, height: pHeight };
+  let liquidBox = {
+    x: liquid.x,
+    y: liquid.y,
+    width: liquid.width,
+    height: liquid.height,
+  };
+
+  // Check if bounding boxes overlap
+  return (
+    playerBox.x < liquidBox.x + liquidBox.width &&
+    playerBox.x + playerBox.width > liquidBox.x &&
+    playerBox.y < liquidBox.y + liquidBox.height &&
+    playerBox.y + playerBox.height > liquidBox.y
+  );
 }
 
 //////////GRAVITY///////////////

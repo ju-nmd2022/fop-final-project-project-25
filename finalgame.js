@@ -115,6 +115,7 @@ function setup() {
   initializeGameLogic();
   // start button
   startButton = createButton("START");
+  startButton.mousePressed(startPlay);
   startButton.position(530, 320);
   startButton.style("color:black");
   startButton.style("background-color:red");
@@ -126,6 +127,7 @@ function setup() {
 
   // play again button winscreen
   winButton = createButton("PLAY AGAIN");
+  winButton.mousePressed(winPlay);
   winButton.position(530, 470);
   winButton.style("color:white");
   winButton.style("background-color:black");
@@ -136,6 +138,7 @@ function setup() {
 
   // try again button failscreen
   failButton = createButton("TRY AGAIN");
+  failButton.mousePressed(failPlay);
   failButton.position(530, 470);
   failButton.style("color:white");
   failButton.style("background-color:black");
@@ -148,6 +151,7 @@ function setup() {
 ///////////////OBSTACLE CLASS/////////////////
 
 class Obstacle {
+  //aggiungi nei parametri in che livello siamo
   constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
@@ -157,20 +161,35 @@ class Obstacle {
 
   display() {
     rect(this.x, this.y, this.width, this.height);
+
+    //aggiungi if siamo in questo livello allora
   }
 }
 
+//THINGS TO ASK: how to write te states of the level here; how to make blur work
+// let liquids= liquidLVL1
 ////////////////LIQUID'S CONSTRUCTOR CLASS///////////////
 class Liquid {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, liquids) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    // this.liquids= liquidLVL1;
   }
 
   display() {
+    // if (state===levelOne){
+    //   let liquids= liquidLVL1
+    // }
+
+    fill(255, random(140, 150), 0);
+    push();
+    noStroke();
+    drawingContext.shadowColor = "red";
+    drawingContext.shadowBlur = 2;
     rect(this.x, this.y, this.width, this.height);
+    pop();
   }
 }
 ////////////////////SCORES/////////////////////
@@ -216,15 +235,9 @@ function obstaclesOne(x, y) {
 }
 
 function liquidOne(x, y) {
-  fill(255, random(140, 150), 0);
-  push();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "red";
-  noStroke();
-  liquidLVL1.push(new Liquid(x + 200, y + 550, 260, 30)); // liquid 1 on bottom left
-  liquidLVL1.push(new Liquid(x + 680, y + 550, 190, 30)); // liquid 2 on the bottom right
-  liquidLVL1.push(new Liquid(x + 700, y + 320, 200, 30)); // liquid 3 on top right
-  pop();
+  liquidLVL1.push(new Liquid(200, 550, 260, 30)); // liquid 1 on bottom left
+  liquidLVL1.push(new Liquid(680, 550, 190, 30)); // liquid 2 on the bottom right
+  liquidLVL1.push(new Liquid(700, 320, 200, 30)); // liquid 3 on top right
 }
 
 function borderOne(x, y) {
@@ -542,6 +555,8 @@ function winScreen() {
   textSize(25);
   text("YOU MADE THE TIME MACHINE WORK AGAIN!", 310, 220, 700, 100);
   startButton.hide();
+  failButton.hide();
+  winButton.show();
 }
 //////////////GAMEOVER SCREEN////////////////
 function failScreen() {
@@ -553,6 +568,8 @@ function failScreen() {
   textAlign(CENTER, TOP);
   text("GAME OVER...", 620, 100);
   startButton.hide();
+  failButton.show();
+  winButton.hide();
 }
 //////////////START SCREEN////////////////
 function startScreen() {
@@ -572,6 +589,8 @@ function startScreen() {
   textSize(15);
   text("Instructions", 900, 520, 100, 100);
   startButton.show();
+  failButton.hide();
+  winButton.hide();
 }
 
 //////////////LEVELS FUNCTIONS/////////////////////
@@ -595,34 +614,36 @@ function levelOne() {
   obstaclesOne(0, 0);
   doorOne(0, 0);
   startButton.hide();
+  failButton.hide();
+  winButton.hide();
   ///////////////
 
   //jumping on the first box on the left
-  if (p1X >= 190 && p1X <= 450 && p1Y >= 355 && p1Y <= 445 && jump === false) {
+  if (p1X >= 190 && p1X <= 430 && p1Y >= 355 && p1Y <= 445 && jump === false) {
     p1Y = 355; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the top right small box
-  if (p1X >= 500 && p1X <= 580 && p1Y >= 255 && p1Y <= 285 && jump === false) {
+  if (p1X >= 500 && p1X <= 560 && p1Y >= 255 && p1Y <= 285 && jump === false) {
     p1Y = 255; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the top right big box
-  if (p1X >= 560 && p1X <= 1160 && p1Y >= 225 && p1Y <= 285 && jump === false) {
+  if (p1X >= 560 && p1X <= 1140 && p1Y >= 225 && p1Y <= 285 && jump === false) {
     p1Y = 225; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the small floating box on top right
-  if (p1X >= 740 && p1X <= 840 && p1Y >= 175 && p1Y <= 195 && jump === false) {
+  if (p1X >= 740 && p1X <= 820 && p1Y >= 175 && p1Y <= 195 && jump === false) {
     p1Y = 175; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   // jumping on the small floating box on bottom right
-  if (p1X >= 730 && p1X <= 820 && p1Y >= 415 && p1Y <= 445 && jump === false) {
+  if (p1X >= 730 && p1X <= 800 && p1Y >= 415 && p1Y <= 445 && jump === false) {
     p1Y = 415; // don't fall through
     velocity = 0;
     jumpCounter = 0;
@@ -663,17 +684,20 @@ function levelTwo() {
   for (let i = 0; i < liquidLVL2.length; i++) {
     liquidLVL2[i].display();
   }
+
   ///////////////
   mapTwo(0, 0);
   borderTwo(0, 0);
   obstaclesTwo(0, 0);
   doorTwo(0, 0);
   startButton.hide();
+  failButton.hide();
+  winButton.hide();
 
   //jumping on the first box from the left
   if (
     p1X >= 200 &&
-    p1X <= 350 &&
+    p1X <= 330 &&
     p1Y >= 405 &&
     p1Y <= minHeight &&
     jump === false
@@ -685,7 +709,7 @@ function levelTwo() {
   //jumping on the second box from the left
   if (
     p1X >= 330 &&
-    p1X <= 420 &&
+    p1X <= 400 &&
     p1Y >= 345 &&
     p1Y <= minHeight &&
     jump === false
@@ -697,7 +721,7 @@ function levelTwo() {
   //jumping on the third box from the left
   if (
     p1X >= 460 &&
-    p1X <= 520 &&
+    p1X <= 500 &&
     p1Y >= 285 &&
     p1Y <= minHeight &&
     jump === false
@@ -710,7 +734,7 @@ function levelTwo() {
   //jumping on the fourth box from the bottom
   if (
     p1X >= 500 &&
-    p1X <= 600 &&
+    p1X <= 580 &&
     p1Y >= 245 &&
     p1Y <= minHeight &&
     jump === false
@@ -723,7 +747,7 @@ function levelTwo() {
   //jumping on the fifth box from the bottom
   if (
     p1X >= 600 &&
-    p1X <= 770 &&
+    p1X <= 750 &&
     p1Y >= 335 &&
     p1Y <= minHeight &&
     jump === false
@@ -733,19 +757,19 @@ function levelTwo() {
     jumpCounter = 0;
   }
   //jumping on the box floating on the bottom right
-  if (p1X >= 815 && p1X <= 925 && p1Y >= 395 && p1Y <= 445 && jump === false) {
+  if (p1X >= 815 && p1X <= 905 && p1Y >= 395 && p1Y <= 445 && jump === false) {
     p1Y = 395; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the first box from the right on the top
-  if (p1X >= 830 && p1X <= 1160 && p1Y >= 125 && p1Y <= 205 && jump === false) {
+  if (p1X >= 830 && p1X <= 1140 && p1Y >= 125 && p1Y <= 205 && jump === false) {
     p1Y = 125; // don't fall through
     velocity = 0;
     jumpCounter = 0;
   }
   //jumping on the second box from the right on the top
-  if (p1X >= 620 && p1X <= 850 && p1Y >= 175 && p1Y <= 205 && jump === false) {
+  if (p1X >= 620 && p1X <= 830 && p1Y >= 175 && p1Y <= 205 && jump === false) {
     p1Y = 175; // don't fall through
     velocity = 0;
     jumpCounter = 0;
@@ -789,6 +813,8 @@ function levelThree() {
     liquidLVL3[i].display();
   }
   startButton.hide();
+  failButton.hide();
+  winButton.hide();
   ///////////////
   //box 1
   fill(0, 0, 0);
@@ -801,7 +827,7 @@ function levelThree() {
   doorThree(0, 0);
   ///////////////
   //jumping on the box on the left top
-  if (p1X >= 0 && p1X <= 330 && p1Y >= 215 && p1Y <= 265 && jump === false) {
+  if (p1X >= 0 && p1X <= 310 && p1Y >= 215 && p1Y <= 265 && jump === false) {
     p1Y = 215; // don't fall through
     velocity = 0;
     jumpCounter = 0;
@@ -809,7 +835,7 @@ function levelThree() {
   //jumping on the first box
   if (
     p1X >= 290 &&
-    p1X <= 400 &&
+    p1X <= 380 &&
     p1Y >= 385 &&
     p1Y <= minHeight &&
     jump === false
@@ -821,7 +847,7 @@ function levelThree() {
   // jumping on the second box
   if (
     p1X >= 380 &&
-    p1X <= 600 &&
+    p1X <= 580 &&
     p1Y >= 305 &&
     p1Y <= minHeight &&
     jump === false
@@ -833,7 +859,7 @@ function levelThree() {
   // jumping on the third box
   if (
     p1X >= 630 &&
-    p1X <= 750 &&
+    p1X <= 730 &&
     p1Y >= 375 &&
     p1Y <= minHeight &&
     jump === false
@@ -843,7 +869,7 @@ function levelThree() {
     jumpCounter = 0;
   }
   // jumping on the small floating box on the right
-  if (p1X >= 800 && p1X <= 1000 && p1Y >= 305 && p1Y <= 345 && jump === false) {
+  if (p1X >= 800 && p1X <= 985 && p1Y >= 305 && p1Y <= 345 && jump === false) {
     p1Y = 305; // don't fall through
     velocity = 0;
     jumpCounter = 0;
@@ -913,89 +939,7 @@ function checkCollision() {
       gearsLVL3.splice(gearsLVL3.indexOf(gear), 1);
     }
   }
-
-  /////////checking for collision with obstacles////////
-  for (let i = 0; i < obstaclesLVL1.length; i++) {
-    let obstacle = obstaclesLVL1[i];
-    if (
-      p1X >= obstacle.x &&
-      p1X <= obstacle.x + 40 &&
-      p1Y + pHeight >= obstacle.y &&
-      p1Y + pHeight <= obstacle.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("Game over!");
-    }
-  }
-  ///////////////
-  for (let i = 0; i < obstaclesLVL2.length; i++) {
-    let obstacle = obstaclesLVL2[i];
-    if (
-      p1X >= obstacle.x &&
-      p1X <= obstacle.x + 40 &&
-      p1Y + pHeight >= obstacle.y &&
-      p1Y + pHeight <= obstacle.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("Game over!");
-    }
-  }
-
-  ///////////////
-  for (let i = 0; i < obstaclesLVL3.length; i++) {
-    let obstacle = obstaclesLVL3[i];
-    if (
-      p1X >= obstacle.x &&
-      p1X <= obstacle.x + 40 &&
-      p1Y + pHeight >= obstacle.y &&
-      p1Y + pHeight <= obstacle.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("Game over!");
-    }
-  }
-  ///////////////COLLISION FOR LIQUIDS//////////////////
-  /////////////LVL1
-  for (let i = 0; i < liquidLVL1.length; i++) {
-    let liquid = liquidLVL1[i];
-    if (
-      p1X >= liquid.x &&
-      p1X <= liquid.x + 40 &&
-      p1Y + pHeight >= liquid.y &&
-      p1Y + pHeight <= liquid.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("gameover");
-    }
-  }
-  ///////////////LVL2
-  for (let i = 0; i < liquidLVL2.length; i++) {
-    let liquid = liquidLVL2[i];
-    if (
-      p1X >= liquid.x &&
-      p1X <= liquid.x + 40 &&
-      p1Y + pHeight >= liquid.y &&
-      p1Y + pHeight <= liquid.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("gameover");
-    }
-  }
-  ///////////////LVL3
-  for (let i = 0; i < liquidLVL3.length; i++) {
-    let liquid = liquidLVL3[i];
-    if (
-      p1X >= liquid.x &&
-      p1X <= liquid.x + 40 &&
-      p1Y + pHeight >= liquid.y &&
-      p1Y + pHeight <= liquid.y + 55
-    ) {
-      // Collision detected, end the game
-      console.log("gameover");
-    }
-  }
 }
-
 //////////GRAVITY///////////////
 function gravity() {
   if (p1Y >= minHeight && jump === false) {
@@ -1023,10 +967,12 @@ function gravity() {
 //////////KEYPRESSED///////////////
 function keyPressed() {
   if (keyIsDown(37)) {
+    walkingRight = false;
     p1X = p1X - 5; //move left
     characterState = true;
     walkingDirection = false;
   } else if (keyIsDown(39)) {
+    walkingRight = true;
     p1X = p1X + 5; // move right
     characterState = true;
     walkingDirection = true;
@@ -1052,37 +998,169 @@ function preload() {
 }
 //////////////FUNCTION MOUSECLICKED////////////////
 
-function mouseClicked() {
-  if (state === "start") {
-    state = "levelOne";
-  } else if (state === "levelOne") {
-    state = "levelTwo";
-  } else if (state === "levelTwo") {
-    state = "levelThree";
-  } else if (state === "levelThree") {
-    state = "win";
-  } else if (state === "win") {
-    state = "fail";
-  } else if (state === "fail") {
-    state = "start";
-  }
+// function mouseClicked() {
+//   if (state === "start") {
+//     state = "levelOne";
+//   } else if (state === "levelOne") {
+//     state = "levelTwo";
+//   } else if (state === "levelTwo") {
+//     state = "levelThree";
+//   } else if (state === "levelThree") {
+//     state = "win";
+//   } else if (state === "win") {
+//     state = "fail";
+//   } else if (state === "fail") {
+//     state = "start";
+//   }
+// }
+
+function startPlay() {
+  state = "levelOne";
+  isGameActive = true;
+}
+
+function winPlay() {
+  state = "levelOne";
+  isGameActive = true;
+}
+
+function failPlay() {
+  state = "levelOne";
+  isGameActive = true;
 }
 
 //////////////DRAW FUNCTION////////////////
+let walkingRight;
 
 function draw() {
   if (state === "start") {
     startScreen();
   } else if (state === "levelOne") {
     levelOne();
-  } else if (isGameActive && state === "levelTwo") {
+  } else if (state === "levelTwo") {
     levelTwo();
-  } else if (isGameActive && state === "levelThree") {
+  } else if (state === "levelThree") {
     levelThree();
   } else if (isGameActive === false && state === "win") {
     winScreen();
   } else if (isGameActive === false && state === "fail") {
     failScreen();
+  }
+
+  ///////////////////// switching the levels//////////////////
+  if (state === "levelOne") {
+    for (let i = 0; i < liquidLVL1.length; i++) {
+      let liquid = liquidLVL1[i];
+      if (
+        (walkingRight === false &&
+          p1X >= liquid.x &&
+          p1X <= liquid.x + liquid.width - pWidth / 2 &&
+          p1Y + pHeight >= liquid.y &&
+          p1Y + pHeight <= liquid.y + 55) ||
+        (walkingRight === true &&
+          p1X >= liquid.x - pWidth / 2 &&
+          p1X <= liquid.x + liquid.width &&
+          p1Y + pHeight >= liquid.y &&
+          p1Y + pHeight <= liquid.y + 55)
+      ) {
+        // Collision detected, end the game
+        failScreen();
+      }
+    }
+
+    for (let i = 0; i < obstaclesLVL1.length; i++) {
+      let obstacle = obstaclesLVL1[i];
+      if (
+        (walkingRight === false &&
+          p1X >= obstacle.x &&
+          p1X <= obstacle.x + obstacle.width - pWidth / 2 &&
+          p1Y + pHeight >= obstacle.y &&
+          p1Y + pHeight <= obstacle.y -55 ) ||
+        (walkingRight === true &&
+          p1X >= obstacle.x - pWidth / 2 &&
+          p1X <= obstacle.x + obstacle.width &&
+          p1Y + pHeight >= obstacle.y &&
+          p1Y + pHeight <= obstacle.y + 55)
+      ) {
+        // Collision detected, end the game
+        failScreen();
+      }
+    }
+  } else if (state === "levelTwo") {
+    for (let i = 0; i < obstaclesLVL2.length; i++) {
+      let obstacle = obstaclesLVL2[i];
+      if (
+        (walkingRight === false &&
+          p1X >= obstacle.x &&
+          p1X <= obstacle.x + obstacle.width - pWidth / 2 &&
+          p1Y + pHeight >= obstacle.y &&
+          p1Y + pHeight <= obstacle.y + 55) ||
+        (walkingRight === true &&
+          p1X >= obstacle.x - pWidth / 2 &&
+          p1X <= obstacle.x + obstacle.width &&
+          p1Y + pHeight >= obstacle.y &&
+          p1Y + pHeight <= obstacle.y + 55)
+      ) {
+        // Collision detected, end the game
+        failScreen();
+      }
+    }
+
+    for (let i = 0; i < liquidLVL2.length; i++) {
+      let liquid = liquidLVL2[i];
+      if (
+        (walkingRight === false &&
+          p1X >= liquid.x &&
+          p1X <= liquid.x + liquid.width - pWidth / 2 &&
+          p1Y + pHeight >= liquid.y &&
+          p1Y + pHeight <= liquid.y + 55) ||
+        (walkingRight === true &&
+          p1X >= liquid.x - pWidth / 2 &&
+          p1X <= liquid.x + liquid.width &&
+          p1Y + pHeight >= liquid.y &&
+          p1Y + pHeight <= liquid.y + 55)
+      ) {
+        // Collision detected, end the game
+        failScreen();
+      }
+    }
+  } else if (state === "levelThree") {
+    for (let i = 0; i < obstaclesLVL3.length; i++) {
+      let obstacle = obstaclesLVL3[i];
+      if (
+        (walkingRight === false &&
+          p1X >= obstacle.x &&
+          p1X <= obstacle.x + obstacle.width - pWidth / 2 &&
+          p1Y + pHeight >= obstacle.y &&
+          p1Y + pHeight <= obstacle.y + 55) ||
+        (walkingRight === true &&
+          p1X >= obstacle.x - pWidth / 2 &&
+          p1X <= obstacle.x + obstacle.width &&
+          p1Y + pHeight >= obstacle.y &&
+          p1Y + pHeight <= obstacle.y + 55)
+      ) {
+        // Collision detected, end the game
+        failScreen();
+      }
+    }
+    for (let i = 0; i < liquidLVL3.length; i++) {
+      let liquid = liquidLVL3[i];
+      if (
+        (walkingRight === false &&
+          p1X >= liquid.x &&
+          p1X <= liquid.x + liquid.width - pWidth / 2 &&
+          p1Y + pHeight >= liquid.y &&
+          p1Y + pHeight <= liquid.y + 55) ||
+        (walkingRight === true &&
+          p1X >= liquid.x - pWidth / 2 &&
+          p1X <= liquid.x + liquid.width &&
+          p1Y + pHeight >= liquid.y &&
+          p1Y + pHeight <= liquid.y + 55)
+      ) {
+        // Collision detected, end the game
+        failScreen();
+      }
+    }
   }
 
   keyPressed();
