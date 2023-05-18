@@ -12,7 +12,7 @@ let maxHeight = 50; // height of sky
 let jumpCounter = 0;
 let walkingRight;
 //////////////
-let timer = 60;
+let timer = 15;
 let countDown;
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
@@ -192,7 +192,39 @@ function showScoreLevel1() {
   textSize(28);
   noStroke();
   textSize(20);
+
   text("Gears collected: " + (3 - gearsLVL1.length), 158, 90);
+  if (gearsLVL1.length === 0) {
+    doorOneColorChange(0, 0);
+  } else {
+    doorOne(0, 0); // Call the doorOne() function to draw the black door
+  }
+  pop();
+}
+
+function resetGearsLVL1() {
+  gearsLVL1 = []; // Reset the gearsLVL1 array to its initial state
+}
+
+function doorOne(x, y) {
+  push();
+  drawingContext.shadowBlur = 2;
+  drawingContext.shadowColor = "white";
+  strokeWeight(1);
+  fill(225, 193, 110);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(255, 223, 150);
+  rect(x + 1030, y + 460, 70, 90);
+  pop();
+}
+
+function doorOneColorChange(x, y) {
+  push();
+  strokeWeight(1);
+  fill(225, 193, 110);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(0, 0, 0);
+  rect(x + 1030, y + 460, 70, 90);
   pop();
 }
 
@@ -314,17 +346,6 @@ function mapOne(x, y) {
   //map
   rect(x + 740, y + 510, 80, 20, 1);
   rect(x + 760, y + 270, 80, 20, 1);
-  pop();
-}
-
-function doorOne(x, y) {
-  push();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "white";
-  fill(225, 193, 110);
-  rect(x + 1020, y + 450, 90, 100);
-  fill(255, 223, 150);
-  rect(x + 1030, y + 460, 70, 90);
   pop();
 }
 
@@ -596,6 +617,7 @@ function startScreen() {
 //////////////LEVELS FUNCTIONS/////////////////////
 function levelOne() {
   background(255, 252, 186);
+  showScoreLevel1();
   liquidOne(0, 0);
   //let the liquids display
   for (let i = 0; i < liquidLVL1.length; i++) {
@@ -612,7 +634,6 @@ function levelOne() {
   mapOne(0, 0);
   borderOne(0, 0);
   obstaclesOne(0, 0);
-  doorOne(0, 0);
   startButton.hide();
   failButton.hide();
   winButton.hide();
@@ -676,7 +697,6 @@ function levelOne() {
     obstaclesLVL1[i].display();
   }
 
-  showScoreLevel1();
   showTimer1();
 }
 
@@ -1005,21 +1025,21 @@ function preload() {
 }
 //////////////FUNCTION MOUSECLICKED////////////////
 
-function mouseClicked() {
-  if (state === "start") {
-    state = "levelOne";
-  } else if (state === "levelOne") {
-    state = "levelTwo";
-  } else if (state === "levelTwo") {
-    state = "levelThree";
-  } else if (state === "levelThree") {
-    state = "win";
-  } else if (state === "win") {
-    state = "fail";
-  } else if (state === "fail") {
-    state = "start";
-  }
-}
+// function mouseClicked() {
+//   if (state === "start") {
+//     state = "levelOne";
+//   } else if (state === "levelOne") {
+//     state = "levelTwo";
+//   } else if (state === "levelTwo") {
+//     state = "levelThree";
+//   } else if (state === "levelThree") {
+//     state = "win";
+//   } else if (state === "win") {
+//     state = "fail";
+//   } else if (state === "fail") {
+//     state = "start";
+//   }
+// }
 
 function startPlay() {
   state = "levelOne";
@@ -1032,10 +1052,13 @@ function winPlay() {
 }
 
 function failPlay() {
+  timer = 15;
   state = "levelOne";
   isGameActive = true;
   p1X = 100; //position X for player
   p1Y = 455;
+  resetGearsLVL1();
+  initializeGameLogic();
 }
 /////////////////TIMER FUNCTION//////////////////
 function showTimer1() {
