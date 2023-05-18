@@ -12,7 +12,7 @@ let maxHeight = 50; // height of sky
 let jumpCounter = 0;
 let walkingRight;
 //////////////
-let timer = 15;
+let timer = 30;
 let countDown;
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
@@ -223,7 +223,7 @@ function doorOneColorChange(x, y) {
   strokeWeight(1);
   fill(225, 193, 110);
   rect(x + 1020, y + 450, 90, 100);
-  fill(0, 0, 0);
+  fill(178, 194, 131);
   rect(x + 1030, y + 460, 70, 90);
   pop();
 }
@@ -235,6 +235,36 @@ function showScoreLevel2() {
   noStroke();
   textSize(20);
   text("Gears collected: " + (3 - gearsLVL2.length), 158, 90);
+  if (gearsLVL2.length === 0) {
+    doorTwoColorChange(0, 0);
+  } else {
+    doorTwo(0, 0); // Call the doorTwo() function to draw the black door
+  }
+  pop();
+}
+
+function resetGearsLVL2() {
+  gearsLVL2 = []; // Reset the gearsLVL2 array to its initial state
+}
+
+function doorTwo(x, y) {
+  push();
+  drawingContext.shadowBlur = 2;
+  drawingContext.shadowColor = "white";
+  fill(111, 85, 55);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(131, 95, 55);
+  rect(x + 1030, y + 460, 70, 90);
+  pop();
+}
+
+function doorTwoColorChange(x, y) {
+  push();
+  strokeWeight(1);
+  fill(111, 85, 55);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(0, 0, 0);
+  rect(x + 1030, y + 460, 70, 90);
   pop();
 }
 
@@ -245,6 +275,37 @@ function showScoreLevel3() {
   noStroke();
   textSize(20);
   text("Gears collected: " + (3 - gearsLVL3.length), 158, 90);
+
+  if (gearsLVL3.length === 0) {
+    doorThreeColorChange(0, 0);
+  } else {
+    doorThree(0, 0); // Call the doorThree() function to draw the black door
+  }
+  pop();
+}
+
+function resetGearsLVL3() {
+  gearsLVL3 = []; // Reset the gearsLVL3 array to its initial state
+}
+
+function doorThree(x, y) {
+  push();
+  drawingContext.shadowBlur = 5;
+  drawingContext.shadowColor = "white";
+  fill(200, 200, 200);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(150, 150, 150);
+  rect(x + 1030, y + 460, 70, 90);
+  pop();
+}
+
+function doorThreeColorChange(x, y) {
+  push();
+  strokeWeight(1);
+  fill(200, 200, 200);
+  rect(x + 1020, y + 450, 90, 100);
+  fill(255, 255, 255);
+  rect(x + 1030, y + 460, 70, 90);
   pop();
 }
 
@@ -452,17 +513,6 @@ function mapTwo(x, y) {
   pop();
 }
 
-function doorTwo(x, y) {
-  push();
-  drawingContext.shadowBlur = 2;
-  drawingContext.shadowColor = "white";
-  fill(111, 85, 55);
-  rect(x + 1020, y + 450, 90, 100);
-  fill(131, 95, 55);
-  rect(x + 1030, y + 460, 70, 90);
-  pop();
-}
-
 //////////////LEVELTHREE SCREEN////////////////
 function obstaclesThree(x, y) {
   ///////////////////////
@@ -545,17 +595,6 @@ function mapThree(x, y) {
 
   endShape();
 
-  pop();
-}
-
-function doorThree(x, y) {
-  push();
-  drawingContext.shadowBlur = 5;
-  drawingContext.shadowColor = "white";
-  fill(200, 200, 200);
-  rect(x + 1020, y + 450, 90, 100);
-  fill(150, 150, 150);
-  rect(x + 1030, y + 460, 70, 90);
   pop();
 }
 
@@ -702,6 +741,7 @@ function levelOne() {
 
 function levelTwo() {
   background(178, 194, 131);
+  showScoreLevel2();
   liquidTwo(0, 0);
   //let the liquids display
   for (let i = 0; i < liquidLVL2.length; i++) {
@@ -712,7 +752,6 @@ function levelTwo() {
   mapTwo(0, 0);
   borderTwo(0, 0);
   obstaclesTwo(0, 0);
-  doorTwo(0, 0);
   startButton.hide();
   failButton.hide();
   winButton.hide();
@@ -824,7 +863,7 @@ function levelTwo() {
   for (let i = 0; i < obstaclesLVL2.length; i++) {
     obstaclesLVL2[i].display();
   }
-  showScoreLevel2();
+
   showTimer2();
 }
 
@@ -832,6 +871,7 @@ function levelThree() {
   push();
   noStroke();
   background(0, 0, 0);
+  showScoreLevel3();
   liquidThree(0, 0);
   //let the liquids display
   for (let i = 0; i < liquidLVL3.length; i++) {
@@ -849,7 +889,7 @@ function levelThree() {
   mapThree(0, 0);
   borderThree(0, 0);
   obstaclesThree(0, 0);
-  doorThree(0, 0);
+
   ///////////////
   //jumping on the box on the left top
   if (p1X >= 0 && p1X <= 310 && p1Y >= 215 && p1Y <= 265 && jump === false) {
@@ -926,7 +966,7 @@ function levelThree() {
   for (let i = 0; i < obstaclesLVL3.length; i++) {
     obstaclesLVL3[i].display();
   }
-  showScoreLevel3();
+
   showTimer3();
 }
 
@@ -1025,21 +1065,21 @@ function preload() {
 }
 //////////////FUNCTION MOUSECLICKED////////////////
 
-// function mouseClicked() {
-//   if (state === "start") {
-//     state = "levelOne";
-//   } else if (state === "levelOne") {
-//     state = "levelTwo";
-//   } else if (state === "levelTwo") {
-//     state = "levelThree";
-//   } else if (state === "levelThree") {
-//     state = "win";
-//   } else if (state === "win") {
-//     state = "fail";
-//   } else if (state === "fail") {
-//     state = "start";
-//   }
-// }
+function mouseClicked() {
+  if (state === "start") {
+    state = "levelOne";
+  } else if (state === "levelOne") {
+    state = "levelTwo";
+  } else if (state === "levelTwo") {
+    state = "levelThree";
+  } else if (state === "levelThree") {
+    state = "win";
+  } else if (state === "win") {
+    state = "fail";
+  } else if (state === "fail") {
+    state = "start";
+  }
+}
 
 function startPlay() {
   state = "levelOne";
@@ -1052,12 +1092,14 @@ function winPlay() {
 }
 
 function failPlay() {
-  timer = 15;
+  timer = 30;
   state = "levelOne";
   isGameActive = true;
   p1X = 100; //position X for player
   p1Y = 455;
   resetGearsLVL1();
+  resetGearsLVL2();
+  resetGearsLVL3();
   initializeGameLogic();
 }
 /////////////////TIMER FUNCTION//////////////////
