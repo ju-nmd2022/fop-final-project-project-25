@@ -10,6 +10,7 @@ let fallingSpeed = 4; //equal to velocity
 let minHeight = 455; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
+let walkingRight;
 //////////////
 let timer = 60;
 let countDown;
@@ -150,9 +151,6 @@ class Obstacle {
     //rect(this.x, this.y, this.width, this.height);
   }
 }
-
-//THINGS TO ASK: how to write te states of the level here; how to make blur work
-// let liquids= liquidLVL1
 ////////////////LIQUID'S CONSTRUCTOR CLASS///////////////
 class Liquid {
   constructor(x, y, width, height, level) {
@@ -204,7 +202,7 @@ function showScoreLevel2() {
   textSize(28);
   noStroke();
   textSize(20);
-  text("Gears collected: " + (3 - gearsLVL2.length), 60, 80);
+  text("Gears collected: " + (3 - gearsLVL2.length), 158, 90);
   pop();
 }
 
@@ -214,7 +212,7 @@ function showScoreLevel3() {
   textSize(28);
   noStroke();
   textSize(20);
-  text("Gears collected: " + (3 - gearsLVL3.length), 60, 80);
+  text("Gears collected: " + (3 - gearsLVL3.length), 158, 90);
   pop();
 }
 
@@ -679,6 +677,7 @@ function levelOne() {
   }
 
   showScoreLevel1();
+  showTimer1();
 }
 
 function levelTwo() {
@@ -806,6 +805,7 @@ function levelTwo() {
     obstaclesLVL2[i].display();
   }
   showScoreLevel2();
+  showTimer2();
 }
 
 function levelThree() {
@@ -907,6 +907,7 @@ function levelThree() {
     obstaclesLVL3[i].display();
   }
   showScoreLevel3();
+  showTimer3();
 }
 
 ////////////////////COLLISION//////////////////////
@@ -1036,11 +1037,8 @@ function failPlay() {
   p1X = 100; //position X for player
   p1Y = 455;
 }
-
-//////////////DRAW FUNCTION////////////////
-let walkingRight;
-
-function showTimer() {
+/////////////////TIMER FUNCTION//////////////////
+function showTimer1() {
   textAlign(CENTER, CENTER);
   push();
   textSize(20);
@@ -1048,16 +1046,45 @@ function showTimer() {
   text("Timer: " + timer, 120, 120);
   noStroke();
   pop();
-
   if (frameCount % 30 == 0 && timer > 0) {
     timer--;
   }
-
+  if (timer == 0) {
+    failScreen();
+  }
+}
+function showTimer2() {
+  textAlign(CENTER, CENTER);
+  push();
+  textSize(20);
+  fill(0, 0, 0);
+  text("Timer: " + timer, 120, 120);
+  noStroke();
+  pop();
+  if (frameCount % 30 == 0 && timer > 0) {
+    timer--;
+  }
+  if (timer == 0) {
+    failScreen();
+  }
+}
+function showTimer3() {
+  textAlign(CENTER, CENTER);
+  push();
+  textSize(20);
+  fill(255, 255, 255);
+  text("Timer: " + timer, 120, 120);
+  noStroke();
+  pop();
+  if (frameCount % 30 == 0 && timer > 0) {
+    timer--;
+  }
   if (timer == 0) {
     failScreen();
   }
 }
 
+//////////////DRAW FUNCTION///////////////
 function draw() {
   if (state === "start") {
     startScreen();
@@ -1188,8 +1215,6 @@ function draw() {
       }
     }
   }
-
-  showTimer();
   keyPressed();
   gravity();
   checkCollision();
