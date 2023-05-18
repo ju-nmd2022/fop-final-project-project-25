@@ -310,9 +310,9 @@ function checkCollision() {
     let obstacle = obstaclesLVL1[i];
     if (
       p1X >= obstacle.x &&
-      p1X <= obstacle.x + 40 &&
+      p1X <= obstacle.x &&
       p1Y + pHeight >= obstacle.y &&
-      p1Y + pHeight <= obstacle.y + 55
+      p1Y + pHeight <= obstacle.y + 30
     ) {
       // Collision detected, end the game
       console.log("Game over!");
