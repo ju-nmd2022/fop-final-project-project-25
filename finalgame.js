@@ -167,7 +167,7 @@ class Liquid {
       fill(255, random(140, 150), 0);
       noStroke();
       drawingContext.shadowBlur = 2;
-      drawingContext.shadowColor = "red";
+      drawingContext.shadowColor = "orange";
       rect(this.x, this.y, this.width, this.height);
     } else if (this.level === 2) {
       fill(85, random(100, 110), 47);
