@@ -4,9 +4,9 @@ let jump = false;
 let characterState = false; // FALSE = idle, TRUE = walking
 let walkingDirection = true; // TRUE = right, FALSE = left
 let direction = 1; //forse of gravity in the y direction
-let velocity = 2; // the speed of character
+let velocity = 6; // the speed of character
 let jumpPower = 11; //how high character jumps
-let fallingSpeed = 4; //equal to velocity
+let fallingSpeed = 6; //equal to velocity
 let minHeight = 455; // height of ground
 let maxHeight = 50; // height of sky
 let jumpCounter = 0;
@@ -1262,6 +1262,18 @@ function draw() {
         failScreen();
         isGameActive = false;
       }
+      if (
+        p1X > 1020 &&
+        p1X < 1110 &&
+        p1Y > 450 &&
+        p1Y < 550 &&
+        gearsLVL1.length === 0
+      ) {
+        state = "levelThree";
+        p1X = 100;
+        p1Y = 455;
+        gearsLVL2.length === 3;
+      }
     }
   } else if (state === "levelThree") {
     for (let i = 0; i < obstaclesLVL3.length; i++) {
@@ -1302,6 +1314,16 @@ function draw() {
         failScreen();
         isGameActive = false;
       }
+    }
+    if (
+      p1X > 1020 &&
+      p1X < 1110 &&
+      p1Y > 450 &&
+      p1Y < 550 &&
+      gearsLVL1.length === 0
+    ) {
+      state = "win";
+      isGameActive === false;
     }
   }
 
