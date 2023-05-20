@@ -977,6 +977,7 @@ function checkCollision() {
   ///////////////////COLLISION FOR GEARS/////////////
   for (let gear of gearsLVL1) {
     if (
+      state === "levelOne" &&
       p1X >= gear.positionX &&
       p1X <= gear.positionX + 40 &&
       p1Y + pHeight >= gear.positionY &&
@@ -988,6 +989,7 @@ function checkCollision() {
   ///////////////////
   for (let gear of gearsLVL2) {
     if (
+      state === "levelTwo" &&
       p1X >= gear.positionX &&
       p1X <= gear.positionX + 40 &&
       p1Y + pHeight >= gear.positionY &&
@@ -999,6 +1001,7 @@ function checkCollision() {
   ///////////////////
   for (let gear of gearsLVL3) {
     if (
+      state === "levelThree" &&
       p1X >= gear.positionX &&
       p1X <= gear.positionX + 40 &&
       p1Y + pHeight >= gear.positionY &&
@@ -1186,6 +1189,18 @@ function draw() {
         // Collision detected, end the game
         isGameActive = false; // Set the game state to inactive
         failScreen();
+      }
+      if (
+        p1X > 1020 &&
+        p1X < 1110 &&
+        p1Y > 450 &&
+        p1Y < 550 &&
+        gearsLVL1.length === 0
+      ) {
+        state = "levelTwo";
+        p1X = 100;
+        p1Y = 455;
+        gearsLVL2.length === 3;
       }
     }
 
