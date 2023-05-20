@@ -12,7 +12,7 @@ let maxHeight = 50; // height of sky
 let jumpCounter = 0;
 let walkingRight;
 //////////////
-let timer = 30;
+let timer = 120;
 let countDown;
 //////////////boxes variables////////////////
 let p1X = 100; //position X for player
@@ -41,6 +41,8 @@ let obstaclesLVL3 = [];
 let liquidLVL1 = [];
 let liquidLVL2 = [];
 let liquidLVL3 = [];
+
+let doors = [];
 
 function initializeGameLogic() {
   gearsLVL1.push({
@@ -151,6 +153,21 @@ class Obstacle {
     //rect(this.x, this.y, this.width, this.height);
   }
 }
+
+// class Door {
+//   //aggiungi nei parametri in che livello siamo
+//   constructor(x, y, width, height) {
+//     this.x = x;
+//     this.y = y;
+//     this.width = width;
+//     this.height = height;
+//   }
+
+//   display() {
+//     //rect(this.x, this.y, this.width, this.height);
+//   }
+// }
+
 ////////////////LIQUID'S CONSTRUCTOR CLASS///////////////
 class Liquid {
   constructor(x, y, width, height, level) {
@@ -219,11 +236,12 @@ function doorOne(x, y) {
 }
 
 function doorOneColorChange(x, y) {
+  // doors.push(new Door(1020, 450, 90, 100)); // Door level 1
   push();
   strokeWeight(1);
   fill(225, 193, 110);
   rect(x + 1020, y + 450, 90, 100);
-  fill(178, 194, 131);
+  fill(0, 0, 0);
   rect(x + 1030, y + 460, 70, 90);
   pop();
 }
@@ -259,6 +277,7 @@ function doorTwo(x, y) {
 }
 
 function doorTwoColorChange(x, y) {
+  // doors.push(new Door(1020, 450, 90, 100)); // Door level 2
   push();
   strokeWeight(1);
   fill(111, 85, 55);
@@ -300,6 +319,7 @@ function doorThree(x, y) {
 }
 
 function doorThreeColorChange(x, y) {
+  // doors.push(new Door(1020, 450, 90, 100)); // Door level 3
   push();
   strokeWeight(1);
   fill(200, 200, 200);
@@ -709,6 +729,17 @@ function levelOne() {
     jumpCounter = 0;
   }
 
+  // if (
+  //   p1X >= 1030 &&
+  //   p1X < 1100 &&
+  //   p1Y === 455
+  //   &&
+  //   gearsLVL3.length === 0
+  // ) {
+  //   levelTwo();
+  // }
+  // //rect(x + 1030, y + 460, 70, 90);
+
   push();
   // character
   fill(0, 0, 0);
@@ -1092,7 +1123,7 @@ function winPlay() {
 }
 
 function failPlay() {
-  timer = 30;
+  timer = 120;
   state = "levelOne";
   isGameActive = true;
   p1X = 100; //position X for player
@@ -1182,6 +1213,7 @@ function draw() {
           p1Y + pHeight <= liquid.y + 55)
       ) {
         // Collision detected, end the game
+        isGameActive = false; // Set the game state to inactive
         failScreen();
       }
     }
@@ -1201,6 +1233,7 @@ function draw() {
           p1Y + pHeight <= obstacle.y + 55)
       ) {
         // Collision detected, end the game
+        isGameActive = false; // Set the game state to inactive
         failScreen();
       }
     }
@@ -1221,6 +1254,7 @@ function draw() {
       ) {
         // Collision detected, end the game
         failScreen();
+        isGameActive = false;
       }
     }
 
@@ -1240,6 +1274,7 @@ function draw() {
       ) {
         // Collision detected, end the game
         failScreen();
+        isGameActive = false;
       }
     }
   } else if (state === "levelThree") {
@@ -1259,8 +1294,11 @@ function draw() {
       ) {
         // Collision detected, end the game
         failScreen();
+        isGameActive = false;
       }
     }
+  
+  
     for (let i = 0; i < liquidLVL3.length; i++) {
       let liquid = liquidLVL3[i];
       if (
@@ -1277,9 +1315,11 @@ function draw() {
       ) {
         // Collision detected, end the game
         failScreen();
+        isGameActive = false;
       }
     }
   }
+
   keyPressed();
   gravity();
   checkCollision();
