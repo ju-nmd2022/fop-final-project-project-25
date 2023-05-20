@@ -42,8 +42,6 @@ let liquidLVL1 = [];
 let liquidLVL2 = [];
 let liquidLVL3 = [];
 
-let doors = [];
-
 function initializeGameLogic() {
   gearsLVL1.push({
     image: "images/gear.png",
@@ -154,20 +152,6 @@ class Obstacle {
   }
 }
 
-// class Door {
-//   //aggiungi nei parametri in che livello siamo
-//   constructor(x, y, width, height) {
-//     this.x = x;
-//     this.y = y;
-//     this.width = width;
-//     this.height = height;
-//   }
-
-//   display() {
-//     //rect(this.x, this.y, this.width, this.height);
-//   }
-// }
-
 ////////////////LIQUID'S CONSTRUCTOR CLASS///////////////
 class Liquid {
   constructor(x, y, width, height, level) {
@@ -236,7 +220,6 @@ function doorOne(x, y) {
 }
 
 function doorOneColorChange(x, y) {
-  // doors.push(new Door(1020, 450, 90, 100)); // Door level 1
   push();
   strokeWeight(1);
   fill(225, 193, 110);
@@ -277,7 +260,6 @@ function doorTwo(x, y) {
 }
 
 function doorTwoColorChange(x, y) {
-  // doors.push(new Door(1020, 450, 90, 100)); // Door level 2
   push();
   strokeWeight(1);
   fill(111, 85, 55);
@@ -319,7 +301,6 @@ function doorThree(x, y) {
 }
 
 function doorThreeColorChange(x, y) {
-  // doors.push(new Door(1020, 450, 90, 100)); // Door level 3
   push();
   strokeWeight(1);
   fill(200, 200, 200);
@@ -729,17 +710,6 @@ function levelOne() {
     jumpCounter = 0;
   }
 
-  // if (
-  //   p1X >= 1030 &&
-  //   p1X < 1100 &&
-  //   p1Y === 455
-  //   &&
-  //   gearsLVL3.length === 0
-  // ) {
-  //   levelTwo();
-  // }
-  // //rect(x + 1030, y + 460, 70, 90);
-
   push();
   // character
   fill(0, 0, 0);
@@ -1064,22 +1034,23 @@ function gravity() {
 }
 //////////KEYPRESSED///////////////
 function keyPressed() {
-  if (keyIsDown(37)) {
+  if (isGameActive === true && keyIsDown(37)) {
     walkingRight = false;
     p1X = p1X - 5; //move left
     characterState = true;
     walkingDirection = false;
-  } else if (keyIsDown(39)) {
+  } else if (isGameActive === true && keyIsDown(39)) {
     walkingRight = true;
     p1X = p1X + 5; // move right
     characterState = true;
     walkingDirection = true;
   }
 
-  if (keyIsDown(38)) {
+  if (isGameActive === true && keyIsDown(38)) {
     jump = true;
   } else {
     jump = false;
+    isGameActive === false;
   }
 }
 
@@ -1096,21 +1067,21 @@ function preload() {
 }
 //////////////FUNCTION MOUSECLICKED////////////////
 
-function mouseClicked() {
-  if (state === "start") {
-    state = "levelOne";
-  } else if (state === "levelOne") {
-    state = "levelTwo";
-  } else if (state === "levelTwo") {
-    state = "levelThree";
-  } else if (state === "levelThree") {
-    state = "win";
-  } else if (state === "win") {
-    state = "fail";
-  } else if (state === "fail") {
-    state = "start";
-  }
-}
+// function mouseClicked() {
+//   if (state === "start") {
+//     state = "levelOne";
+//   } else if (state === "levelOne") {
+//     state = "levelTwo";
+//   } else if (state === "levelTwo") {
+//     state = "levelThree";
+//   } else if (state === "levelThree") {
+//     state = "win";
+//   } else if (state === "win") {
+//     state = "fail";
+//   } else if (state === "fail") {
+//     state = "start";
+//   }
+// }
 
 function startPlay() {
   state = "levelOne";
@@ -1297,8 +1268,7 @@ function draw() {
         isGameActive = false;
       }
     }
-  
-  
+
     for (let i = 0; i < liquidLVL3.length; i++) {
       let liquid = liquidLVL3[i];
       if (
