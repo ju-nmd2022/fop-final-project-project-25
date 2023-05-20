@@ -112,21 +112,46 @@ function setup() {
   startButton.size(220, 100);
   startButton.style("font-size", "45px");
   startButton.hide();
+  
+  // history button
+  historyButton = createButton("History");
+  historyButton.mousePressed(historyPlay);
+  historyButton.position(920, 497);
+  historyButton.style("color:white");
+  historyButton.style("background-color:black");
+  historyButton.style("border-radius", "10px");
+  historyButton.style("border", "none");
+  historyButton.size(120, 30);
+  historyButton.style("font-size", "20px");
+  historyButton.hide();
+  // instructions button
+  instructionsButton = createButton("Instructions");
+  instructionsButton.mousePressed(instructionsPlay);
+  instructionsButton.position(900, 530);
+  instructionsButton.style("color:white");
+  instructionsButton.style("background-color:black");
+  instructionsButton.style("border-radius", "10px");
+  instructionsButton.style("border", "none");
+  instructionsButton.size(120, 30);
+  instructionsButton.style("font-size", "20px");
+  instructionsButton.hide();
   // history button OK!
-  okHistoryButton = createButton("Ok!");
-  okHistoryButton.position(1000, 530);
-  okHistoryButton.style("color:white");
-  okHistoryButton.style("background-color:black");
-  okHistoryButton.style("border", "none");
-  okHistoryButton.size(30, 30);
-  okHistoryButton.style("font-size", "45px");
-
+  okButton = createButton("Go back");
+  okButton.mousePressed(goBackPlay);
+  okButton.position(180, 430);
+  okButton.style("color:black");
+  okButton.style("background-color:white");
+  okButton.style("border-radius", "10px");
+  okButton.style("border", "none");
+  okButton.size(120, 60);
+  okButton.style("font-size", "20px");
+  okButton.hide();
   // play again button winscreen
   winButton = createButton("PLAY AGAIN");
   winButton.mousePressed(winPlay);
   winButton.position(530, 470);
   winButton.style("color:white");
-  winButton.style("background-color:black");
+  winButton.style("background-color:red");
   winButton.style("border", "none");
   winButton.size(200, 30);
   winButton.style("font-size", "30px");
@@ -137,7 +162,7 @@ function setup() {
   failButton.mousePressed(failPlay);
   failButton.position(530, 470);
   failButton.style("color:white");
-  failButton.style("background-color:black");
+  failButton.style("background-color:red");
   failButton.style("border", "none");
   failButton.size(200, 30);
   failButton.style("font-size", "30px");
@@ -626,6 +651,9 @@ function winScreen() {
   startButton.hide();
   failButton.hide();
   winButton.show();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.hide();
 }
 //////////////GAMEOVER SCREEN////////////////
 function failScreen() {
@@ -639,6 +667,9 @@ function failScreen() {
   startButton.hide();
   failButton.show();
   winButton.hide();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.hide();
 }
 //////////////START SCREEN////////////////
 function startScreen() {
@@ -649,19 +680,79 @@ function startScreen() {
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("TIMEMACHINE", 590, 100);
-  // text: history
-  fill(255, 255, 255);
-  textSize(15);
-  text("History", 915, 500, 100, 100);
-  // text: instructions
-  fill(255, 255, 255);
-  textSize(15);
-  text("Instructions", 900, 520, 100, 100);
   startButton.show();
   failButton.hide();
   winButton.hide();
+  historyButton.show();
+  instructionsButton.show();
+  okButton.hide();
 }
-
+///////////////////HISTORY SCREEN//////////////////
+function historyScreen() {
+  background(0, 0, 0);
+  // text: History
+  fill(255, 255, 255);
+  textSize(60);
+  // textFont(Copperplate);
+  textAlign(CENTER, TOP);
+  text("History", 590, 30);
+  // text: the little story about time traveling
+  fill(255, 255, 255);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  textLeading(25); //to make a bigger line spacing
+  text(
+    "Our game character is an adventurous time traveler, exploring the depths of time and space in his trusty time machine. However, during one of his expeditions, disaster struck, and his machine broke into pieces. \n The only way to fix it is to collect gears scattered across three different locations - the ancient Egyptian pyramids, a mysterious forest, and the vast expanse of space.\n The levels get progressively more challenging, with each level presenting new obstacles and dangers to avoid. \n To advance to the next level, the player must collect all the gears and reach the door that will transport them to the next location. \n The levels must be completed in order, with no level map screen to guide the player. If the player touches any of the obstacles - spikes or dangerous liquids - they will be sent back to the beginning of the first level. Additionally, the game includes a timer, and if the time runs out, the player must start from the first level again. \n Can you help our time traveler fix his machine and continue his exciting journey through time and space? Join the adventure and find out!",
+    450,
+    120,
+    600,
+    600
+  );
+  startButton.hide();
+  failButton.hide();
+  winButton.hide();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.show();
+}
+///////////////////////INSTRUCTIONS SCREEN///////////////
+function instructionsScreen() {
+  background(0, 0, 0);
+  // text: instructions title
+  fill(255, 255, 255);
+  textFont("Arial Narrow");
+  textSize(60);
+  // textFont(Copperplate);
+  textAlign(CENTER, TOP);
+  text("INSTRUCTIONS", 590, 30);
+  // text: instructions how to move etc made as an array
+  let instructionsList = [
+    "Use the arrow keys to move the time traveler in all directions",
+    "Collect all the gears to fix the time machine",
+    "Avoid the deadly obstacles along the way",
+    "After collecting all items go through the appearing door to advance in level",
+    "If you die, the character will start over the game from the 1st level.",
+    "Pass all levels to win",
+  ];
+  // helped by chatGPT in the next 5 lines of code on how to make the array display vertically
+  let x = 390; // Set the initial x position
+  let y = 170; // Set the initial y position
+  for (let i = 0; i < instructionsList.length; i++) {
+    fill(255, 255, 255);
+    textSize(15);
+    textAlign(LEFT, TOP);
+    textLeading(35);
+    textFont("Arial");
+    text(instructionsList[i], x, y, 600, 600); // Draw the list item with the bullet point
+    y += textLeading(); // Increment the y position by the line spacing
+  }
+  startButton.hide();
+  failButton.hide();
+  winButton.hide();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.show();
+}
 //////////////LEVELS FUNCTIONS/////////////////////
 function levelOne() {
   background(255, 252, 186);
@@ -685,6 +776,9 @@ function levelOne() {
   startButton.hide();
   failButton.hide();
   winButton.hide();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.hide();
   ///////////////
 
   //jumping on the first box on the left
@@ -764,6 +858,9 @@ function levelTwo() {
   startButton.hide();
   failButton.hide();
   winButton.hide();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.hide();
 
   //jumping on the first box from the left
   if (
@@ -889,6 +986,9 @@ function levelThree() {
   startButton.hide();
   failButton.hide();
   winButton.hide();
+  historyButton.hide();
+  instructionsButton.hide();
+  okButton.hide();
   ///////////////
   //box 1
   fill(0, 0, 0);
@@ -1077,6 +1177,18 @@ function preload() {
   alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
 }
 
+function historyPlay() {
+  state = "history";
+}
+
+function instructionsPlay() {
+  state = "instructions";
+}
+
+function goBackPlay() {
+  state = "start";
+}
+
 function startPlay() {
   state = "levelOne";
   isGameActive = true;
@@ -1149,6 +1261,10 @@ function showTimer3() {
 function draw() {
   if (state === "start") {
     startScreen();
+  } else if (state === "instructions") {
+    instructionsScreen();
+  } else if (state === "history") {
+    historyScreen();
   } else if (state === "levelOne") {
     levelOne();
   } else if (state === "levelTwo") {
