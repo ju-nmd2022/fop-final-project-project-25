@@ -244,8 +244,8 @@ function doorOne(x, y) {
   push();
   drawingContext.shadowBlur = 2;
   drawingContext.shadowColor = "white";
-  strokeWeight(1);
   fill(225, 193, 110);
+  stroke(0); // Add stroke color (black)
   rect(x + 1020, y + 450, 90, 100);
   fill(255, 223, 150);
   rect(x + 1030, y + 460, 70, 90);
