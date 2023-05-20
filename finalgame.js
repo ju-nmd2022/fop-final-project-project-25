@@ -104,19 +104,20 @@ function setup() {
   // start button
   startButton = createButton("START");
   startButton.mousePressed(startPlay);
-  startButton.position(530, 320);
+  startButton.position(510, 320);
   startButton.style("color:black");
-  startButton.style("background-color:red");
+  // startButton.style.fontFamily = "Copperplate";
+  startButton.style("background-color:rgb(255, 100, 0)");
   startButton.style("border", "none");
   startButton.style("border-radius", "10px");
   startButton.size(220, 100);
-  startButton.style("font-size", "45px");
+  startButton.style("font-size", "35px");
   startButton.hide();
-  
+
   // history button
   historyButton = createButton("History");
   historyButton.mousePressed(historyPlay);
-  historyButton.position(920, 497);
+  historyButton.position(980, 497);
   historyButton.style("color:white");
   historyButton.style("background-color:black");
   historyButton.style("border-radius", "10px");
@@ -127,7 +128,7 @@ function setup() {
   // instructions button
   instructionsButton = createButton("Instructions");
   instructionsButton.mousePressed(instructionsPlay);
-  instructionsButton.position(900, 530);
+  instructionsButton.position(960, 530);
   instructionsButton.style("color:white");
   instructionsButton.style("background-color:black");
   instructionsButton.style("border-radius", "10px");
@@ -149,7 +150,7 @@ function setup() {
   // play again button winscreen
   winButton = createButton("PLAY AGAIN");
   winButton.mousePressed(winPlay);
-  winButton.position(530, 470);
+  winButton.position(530, 320);
   winButton.style("color:white");
   winButton.style("background-color:red");
   winButton.style("border", "none");
@@ -160,7 +161,7 @@ function setup() {
   // try again button failscreen
   failButton = createButton("TRY AGAIN");
   failButton.mousePressed(failPlay);
-  failButton.position(530, 470);
+  failButton.position(530, 320);
   failButton.style("color:white");
   failButton.style("background-color:red");
   failButton.style("border", "none");
@@ -638,7 +639,6 @@ function winScreen() {
   // text: YOU WIN!
   fill(255, 255, 255);
   textSize(90);
-  // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("YOU WIN!", 620, 100);
   fill(255, 255, 255);
@@ -674,12 +674,11 @@ function failScreen() {
 //////////////START SCREEN////////////////
 function startScreen() {
   background(0, 0, 0);
-  // text: timemachine
   fill(255, 255, 255);
-  textSize(90);
-  // textFont(Copperplate);
+  textFont("copperplate");
+  textSize(100);
   textAlign(CENTER, TOP);
-  text("TIMEMACHINE", 590, 100);
+  text("TimeMachine", 590, 140);
   startButton.show();
   failButton.hide();
   winButton.hide();
@@ -703,10 +702,10 @@ function historyScreen() {
   textLeading(25); //to make a bigger line spacing
   text(
     "Our game character is an adventurous time traveler, exploring the depths of time and space in his trusty time machine. However, during one of his expeditions, disaster struck, and his machine broke into pieces. \n The only way to fix it is to collect gears scattered across three different locations - the ancient Egyptian pyramids, a mysterious forest, and the vast expanse of space.\n The levels get progressively more challenging, with each level presenting new obstacles and dangers to avoid. \n To advance to the next level, the player must collect all the gears and reach the door that will transport them to the next location. \n The levels must be completed in order, with no level map screen to guide the player. If the player touches any of the obstacles - spikes or dangerous liquids - they will be sent back to the beginning of the first level. Additionally, the game includes a timer, and if the time runs out, the player must start from the first level again. \n Can you help our time traveler fix his machine and continue his exciting journey through time and space? Join the adventure and find out!",
-    450,
+    470,
     120,
     600,
-    600
+    900
   );
   startButton.hide();
   failButton.hide();
@@ -720,11 +719,11 @@ function instructionsScreen() {
   background(0, 0, 0);
   // text: instructions title
   fill(255, 255, 255);
-  textFont("Arial Narrow");
+  textFont("copperplate");
   textSize(60);
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
-  text("INSTRUCTIONS", 590, 30);
+  text("INSTRUCTIONS", 620, 60);
   // text: instructions how to move etc made as an array
   let instructionsList = [
     "Use the arrow keys to move the time traveler in all directions",
@@ -742,8 +741,8 @@ function instructionsScreen() {
     textSize(15);
     textAlign(LEFT, TOP);
     textLeading(35);
-    textFont("Arial");
-    text(instructionsList[i], x, y, 600, 600); // Draw the list item with the bullet point
+    textFont("Copperplate");
+    text(instructionsList[i], x, y, 700, 700); // Draw the list item with the bullet point
     y += textLeading(); // Increment the y position by the line spacing
   }
   startButton.hide();
