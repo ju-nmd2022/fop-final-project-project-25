@@ -15,7 +15,7 @@ let walkingRight;
 let timer = 120;
 let countDown;
 //////////////boxes variables////////////////
-let p1X = 100; //position X for player
+let p1X = 80; //position X for player
 let p1Y = 455;
 let pWidth = 50;
 let pHeight = 95;
@@ -107,10 +107,10 @@ function setup() {
   startButton.position(510, 320);
   startButton.style("color:black");
   // startButton.style.fontFamily = "Copperplate";
-  startButton.style("background-color:rgb(255, 100, 0)");
+  startButton.style("background-color:red");
   startButton.style("border", "none");
   startButton.style("border-radius", "10px");
-  startButton.size(220, 100);
+  startButton.size(180, 70);
   startButton.style("font-size", "35px");
   startButton.hide();
 
@@ -151,10 +151,11 @@ function setup() {
   winButton = createButton("PLAY AGAIN");
   winButton.mousePressed(winPlay);
   winButton.position(530, 320);
-  winButton.style("color:white");
+  winButton.style("color:black");
   winButton.style("background-color:red");
+  winButton.style("border-radius", "10px");
   winButton.style("border", "none");
-  winButton.size(200, 30);
+  winButton.size(180, 70);
   winButton.style("font-size", "30px");
   winButton.hide();
 
@@ -162,12 +163,22 @@ function setup() {
   failButton = createButton("TRY AGAIN");
   failButton.mousePressed(failPlay);
   failButton.position(530, 320);
-  failButton.style("color:white");
+  failButton.style("color:black");
   failButton.style("background-color:red");
+  failButton.style("border-radius", "10px");
   failButton.style("border", "none");
-  failButton.size(200, 30);
+  failButton.size(180, 70);
   failButton.style("font-size", "30px");
   failButton.hide();
+//GIF ANIMATION
+  // alienWalkingRight = createImg("images/alienWalkingRight.gif");
+  // alienWalkingLeft = createImg("images/alienWalkingLeft.gif");
+  
+  // // Set the position and size of the animations
+  // alienWalkingRight.position(100, 100);
+  // alienWalkingRight.size(100, 100);
+  // alienWalkingLeft.position(100, 100);
+  // alienWalkingLeft.size(100, 100);
 }
 
 ///////////////OBSTACLE CLASS/////////////////
@@ -199,7 +210,7 @@ class Liquid {
   display() {
     push();
     if (this.level === 1) {
-      fill(255, random(140, 150), 0);
+      fill(255, random(135, 150), 0);
       noStroke();
       drawingContext.shadowBlur = 2;
       drawingContext.shadowColor = "orange";
@@ -224,10 +235,9 @@ class Liquid {
 function showScoreLevel1() {
   push();
   fill(0, 0, 0);
-  textSize(28);
   noStroke();
   textSize(20);
-
+  textFont("copperplate");
   text("Gears collected: " + (3 - gearsLVL1.length), 158, 90);
   if (gearsLVL1.length === 0) {
     doorOneColorChange(0, 0);
@@ -266,9 +276,9 @@ function doorOneColorChange(x, y) {
 function showScoreLevel2() {
   push();
   fill(0, 0, 0);
-  textSize(28);
   noStroke();
   textSize(20);
+  textFont("copperplate");
   text("Gears collected: " + (3 - gearsLVL2.length), 158, 90);
   if (gearsLVL2.length === 0) {
     doorTwoColorChange(0, 0);
@@ -306,9 +316,9 @@ function doorTwoColorChange(x, y) {
 function showScoreLevel3() {
   push();
   fill(255, 255, 255);
-  textSize(28);
   noStroke();
   textSize(20);
+  textFont("copperplate");
   text("Gears collected: " + (3 - gearsLVL3.length), 158, 90);
 
   if (gearsLVL3.length === 0) {
@@ -663,7 +673,7 @@ function failScreen() {
   textSize(90);
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
-  text("GAME OVER...", 620, 100);
+  text("GAME OVER", 590, 140);
   startButton.hide();
   failButton.show();
   winButton.hide();
@@ -826,9 +836,9 @@ function levelOne() {
   }
   pop();
 
-  if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
-    isGameActive = false;
-  }
+  // if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
+  //   isGameActive = false;
+  // }
 
   for (let currentGear of gearsLVL1) {
     image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
@@ -1214,6 +1224,7 @@ function showTimer1() {
   textAlign(CENTER, CENTER);
   push();
   textSize(20);
+  textFont("copperplate");
   fill(0, 0, 0);
   text("Timer: " + timer, 120, 120);
   noStroke();
@@ -1229,6 +1240,7 @@ function showTimer2() {
   textAlign(CENTER, CENTER);
   push();
   textSize(20);
+  textFont("copperplate");
   fill(0, 0, 0);
   text("Timer: " + timer, 120, 120);
   noStroke();
@@ -1244,6 +1256,7 @@ function showTimer3() {
   textAlign(CENTER, CENTER);
   push();
   textSize(20);
+  textFont("copperplate");
   fill(255, 255, 255);
   text("Timer: " + timer, 120, 120);
   noStroke();
@@ -1304,7 +1317,7 @@ function draw() {
         gearsLVL1.length === 0
       ) {
         state = "levelTwo";
-        p1X = 100;
+        p1X = 70;
         p1Y = 455;
         gearsLVL2.length === 3;
       }
