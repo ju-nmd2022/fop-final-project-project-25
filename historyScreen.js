@@ -3,14 +3,14 @@ function setup() {
   createCanvas(1200, 600);
   background(0, 0, 0);
   // Ok button
-  button = createButton("Ok!");
-  button.position(1000, 530);
-  button.style("color:white");
-  button.style("background-color:black");
-  button.style("border", "none");
-  button.size(30, 30);
+  historyButton = createButton("Ok!");
+  historyButton.position(1000, 530);
+  historyButton.style("color:white");
+  historyButton.style("background-color:black");
+  historyButton.style("border", "none");
+  historyButton.size(30, 30);
 
-  button.style("font-size", "45px");
+  historyButton.style("font-size", "45px");
 
   // link it to the start screen page. button.mousePressed(startScreen);
 }

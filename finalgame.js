@@ -94,7 +94,7 @@ function initializeGameLogic() {
 
 //////STATE OF THE GAME/////////
 let isGameActive = true;
-let state = "levelOne";
+let state = "start";
 
 function setup() {
   createCanvas(1200, 600);
@@ -112,6 +112,14 @@ function setup() {
   startButton.size(220, 100);
   startButton.style("font-size", "45px");
   startButton.hide();
+  // history button OK!
+  okHistoryButton = createButton("Ok!");
+  okHistoryButton.position(1000, 530);
+  okHistoryButton.style("color:white");
+  okHistoryButton.style("background-color:black");
+  okHistoryButton.style("border", "none");
+  okHistoryButton.size(30, 30);
+  okHistoryButton.style("font-size", "45px");
 
   // play again button winscreen
   winButton = createButton("PLAY AGAIN");
@@ -315,8 +323,8 @@ function obstaclesOne(x, y) {
   // Create obstacles and add them to the array
   obstaclesLVL1.push(new Obstacle(1000, 300, 40, 20)); // Obstacle 1
   obstaclesLVL1.push(new Obstacle(330, 430, 40, 20)); // Obstacle 2
-  obstaclesLVL1.push(new Obstacle(570, 380, 40, 40)); // Obstacle 3
-  obstaclesLVL1.push(new Obstacle(550, 380, 20, 20)); // Obstacle 4
+  // obstaclesLVL1.push(new Obstacle(570, 380, 40, 40)); // Obstacle 3
+  // obstaclesLVL1.push(new Obstacle(550, 380, 20, 20)); // Obstacle 4
 
   push();
   fill(225, 193, 110);
@@ -1068,23 +1076,6 @@ function preload() {
 
   alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
 }
-//////////////FUNCTION MOUSECLICKED////////////////
-
-// function mouseClicked() {
-//   if (state === "start") {
-//     state = "levelOne";
-//   } else if (state === "levelOne") {
-//     state = "levelTwo";
-//   } else if (state === "levelTwo") {
-//     state = "levelThree";
-//   } else if (state === "levelThree") {
-//     state = "win";
-//   } else if (state === "win") {
-//     state = "fail";
-//   } else if (state === "fail") {
-//     state = "start";
-//   }
-// }
 
 function startPlay() {
   state = "levelOne";
