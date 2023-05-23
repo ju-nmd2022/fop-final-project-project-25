@@ -94,7 +94,7 @@ function initializeGameLogic() {
 
 //////STATE OF THE GAME/////////
 let isGameActive = true;
-let state = "levelThree";
+let state = "fail";
 
 function setup() {
   createCanvas(1200, 600);
@@ -112,6 +112,7 @@ function setup() {
   startButton.style("border-radius", "10px");
   startButton.size(180, 70);
   startButton.style("font-size", "35px");
+  startButton.addClass("redButtons");
   startButton.hide();
 
   // history button
@@ -124,6 +125,7 @@ function setup() {
   historyButton.style("border", "none");
   historyButton.size(120, 30);
   historyButton.style("font-size", "20px");
+  historyButton.addClass("textButton");
   historyButton.hide();
   // instructions button
   instructionsButton = createButton("Instructions");
@@ -135,8 +137,9 @@ function setup() {
   instructionsButton.style("border", "none");
   instructionsButton.size(120, 30);
   instructionsButton.style("font-size", "20px");
+  instructionsButton.addClass("textButton");
   instructionsButton.hide();
-  // history button OK!
+  // button OK!
   okButton = createButton("Go back");
   okButton.mousePressed(goBackPlay);
   okButton.position(180, 430);
@@ -146,6 +149,7 @@ function setup() {
   okButton.style("border", "none");
   okButton.size(120, 60);
   okButton.style("font-size", "20px");
+  okButton.addClass("okButton");
   okButton.hide();
   // play again button winscreen
   winButton = createButton("PLAY AGAIN");
@@ -157,6 +161,7 @@ function setup() {
   winButton.style("border", "none");
   winButton.size(180, 70);
   winButton.style("font-size", "30px");
+  winButton.addClass("redButtons");
   winButton.hide();
 
   // try again button failscreen
@@ -169,6 +174,7 @@ function setup() {
   failButton.style("border", "none");
   failButton.size(180, 70);
   failButton.style("font-size", "30px");
+  failButton.addClass("redButtons");
   failButton.hide();
   //GIF ANIMATION
   // alienWalkingRight = createImg("images/alienWalkingRight.gif");
@@ -193,7 +199,7 @@ class Obstacle {
   }
 
   display() {
-    //rect(this.x, this.y, this.width, this.height);
+    // rect(this.x, this.y, this.width, this.height);
   }
 }
 
@@ -357,10 +363,8 @@ function doorThreeColorChange(x, y) {
 //////////////LEVELONE SCREEN////////////////
 function obstaclesOne(x, y) {
   // Create obstacles and add them to the array
-  obstaclesLVL1.push(new Obstacle(1000, 300, 40, 20)); // Obstacle 1
-  obstaclesLVL1.push(new Obstacle(330, 430, 40, 20)); // Obstacle 2
-  // obstaclesLVL1.push(new Obstacle(570, 380, 40, 40)); // Obstacle 3
-  // obstaclesLVL1.push(new Obstacle(550, 380, 20, 20)); // Obstacle 4
+  obstaclesLVL1.push(new Obstacle(1000, 308, 40, 12)); // Obstacle 1
+  obstaclesLVL1.push(new Obstacle(330, 438, 40, 12)); // Obstacle 2
 
   push();
   fill(225, 193, 110);
@@ -458,10 +462,8 @@ function mapOne(x, y) {
 //////////////LEVELTWO SCREEN////////////////
 function obstaclesTwo(x, y) {
   ///////////////////////
-  obstaclesLVL2.push(new Obstacle(870, 300, 40, 40)); // Obstacle 1
-  obstaclesLVL2.push(new Obstacle(310, 480, 40, 20)); // Obstacle 2
-  obstaclesLVL2.push(new Obstacle(720, 250, 40, 20)); // Obstacle 3
-  obstaclesLVL2.push(new Obstacle(850, 300, 20, 20)); // Obstacle 4
+  obstaclesLVL2.push(new Obstacle(310, 488, 40, 12)); // Obstacle 1
+  obstaclesLVL2.push(new Obstacle(720, 258, 40, 12)); // Obstacle 2
 
   push();
   fill(72, 60, 50);
@@ -561,8 +563,8 @@ function mapTwo(x, y) {
 //////////////LEVELTHREE SCREEN////////////////
 function obstaclesThree(x, y) {
   ///////////////////////
-  obstaclesLVL3.push(new Obstacle(880, 380, 40, 20)); // Obstacle 1
-  obstaclesLVL3.push(new Obstacle(480, 380, 40, 20)); // Obstacle 2
+  obstaclesLVL3.push(new Obstacle(880, 388, 40, 12)); // Obstacle 1
+  obstaclesLVL3.push(new Obstacle(480, 388, 40, 12)); // Obstacle 2
 
   push();
   fill(200, 200, 200);
@@ -645,19 +647,19 @@ function mapThree(x, y) {
 
 //////////////WIN SCREEN////////////////
 function winScreen() {
+  push();
   background(0, 0, 0);
   // text: YOU WIN!
   fill(255, 255, 255);
   textSize(90);
+  textFont("copperplate");
   textAlign(CENTER, TOP);
-  text("YOU WIN!", 620, 100);
-  fill(255, 255, 255);
-  textSize(15);
-  text("TIME SCORE:", 510, 420, 200, 100);
-  // text: subtitle-text
+  text("YOU WON",600,140);
   fill(255, 255, 255);
   textSize(25);
-  text("YOU MADE THE TIME MACHINE WORK AGAIN!", 310, 220, 700, 100);
+  textAlign(CENTER, TOP);
+  text("YOU MADE THE TIME MACHINE WORK AGAIN!", 600, 240);
+  pop();
   startButton.hide();
   failButton.hide();
   winButton.show();
@@ -673,7 +675,7 @@ function failScreen() {
   textSize(90);
   // textFont(Copperplate);
   textAlign(CENTER, TOP);
-  text("GAME OVER", 590, 140);
+  text("GAME OVER", 600, 140);
   startButton.hide();
   failButton.show();
   winButton.hide();
@@ -688,7 +690,7 @@ function startScreen() {
   textFont("copperplate");
   textSize(100);
   textAlign(CENTER, TOP);
-  text("TimeMachine", 590, 140);
+  text("TimeMachine", 600, 140);
   startButton.show();
   failButton.hide();
   winButton.hide();
