@@ -94,7 +94,7 @@ function initializeGameLogic() {
 
 //////STATE OF THE GAME/////////
 let isGameActive = true;
-let state = "fail";
+let state = "start";
 
 function setup() {
   createCanvas(1200, 600);
@@ -104,7 +104,7 @@ function setup() {
   // start button
   startButton = createButton("START");
   startButton.mousePressed(startPlay);
-  startButton.position(510, 320);
+  startButton.position(630, 400);
   startButton.style("color:black");
   // startButton.style.fontFamily = "Copperplate";
   startButton.style("background-color:red");
@@ -118,7 +118,7 @@ function setup() {
   // history button
   historyButton = createButton("History");
   historyButton.mousePressed(historyPlay);
-  historyButton.position(980, 497);
+  historyButton.position(1070, 550);
   historyButton.style("color:white");
   historyButton.style("background-color:black");
   historyButton.style("border-radius", "10px");
@@ -130,7 +130,7 @@ function setup() {
   // instructions button
   instructionsButton = createButton("Instructions");
   instructionsButton.mousePressed(instructionsPlay);
-  instructionsButton.position(960, 530);
+  instructionsButton.position(1050, 590);
   instructionsButton.style("color:white");
   instructionsButton.style("background-color:black");
   instructionsButton.style("border-radius", "10px");
@@ -142,7 +142,7 @@ function setup() {
   // button OK!
   okButton = createButton("Go back");
   okButton.mousePressed(goBackPlay);
-  okButton.position(180, 430);
+  okButton.position(283, 500);
   okButton.style("color:black");
   okButton.style("background-color:white");
   okButton.style("border-radius", "10px");
@@ -154,7 +154,7 @@ function setup() {
   // play again button winscreen
   winButton = createButton("PLAY AGAIN");
   winButton.mousePressed(winPlay);
-  winButton.position(530, 320);
+  winButton.position(630, 400);
   winButton.style("color:black");
   winButton.style("background-color:red");
   winButton.style("border-radius", "10px");
@@ -167,7 +167,7 @@ function setup() {
   // try again button failscreen
   failButton = createButton("TRY AGAIN");
   failButton.mousePressed(failPlay);
-  failButton.position(530, 320);
+  failButton.position(630, 400);
   failButton.style("color:black");
   failButton.style("background-color:red");
   failButton.style("border-radius", "10px");
@@ -654,7 +654,7 @@ function winScreen() {
   textSize(90);
   textFont("copperplate");
   textAlign(CENTER, TOP);
-  text("YOU WON",600,140);
+  text("YOU WON", 600, 140);
   fill(255, 255, 255);
   textSize(25);
   textAlign(CENTER, TOP);
@@ -729,25 +729,26 @@ function historyScreen() {
 ///////////////////////INSTRUCTIONS SCREEN///////////////
 function instructionsScreen() {
   background(0, 0, 0);
-  // text: instructions title
   fill(255, 255, 255);
   textFont("copperplate");
   textSize(60);
-  // textFont(Copperplate);
-  textAlign(CENTER, TOP);
-  text("INSTRUCTIONS", 620, 60);
+  text("INSTRUCTIONS", 470, 30);
   // text: instructions how to move etc made as an array
   let instructionsList = [
     "Use the arrow keys to move the time traveler in all directions",
-    "Collect all the gears to fix the time machine",
-    "Avoid the deadly obstacles along the way",
-    "After collecting all items go through the appearing door to advance in level",
-    "If you die, the character will start over the game from the 1st level.",
+    "Jump on the platforms to move forward on the level",
+    "Collect 3 gears in each level to activate the door",
+    "Each door is a portal to the next level",
+    "Avoid the deadly spikes along the way",
+    "This alien cannot swim, so stay away from the liquids too",
+    "If you die, the character will start over the game from the 1st level",
+    "Collect all gears before time runs out",
+    "Collect all the gears in the 3 levels",
     "Pass all levels to win",
   ];
   // helped by chatGPT in the next 5 lines of code on how to make the array display vertically
-  let x = 390; // Set the initial x position
-  let y = 170; // Set the initial y position
+  let x = 470; // Set the initial x position
+  let y = 120; // Set the initial y position
   for (let i = 0; i < instructionsList.length; i++) {
     fill(255, 255, 255);
     textSize(15);
@@ -1205,17 +1206,12 @@ function goBackPlay() {
 function startPlay() {
   state = "levelOne";
   isGameActive = true;
+  p1X = 100; //position X for player
+  p1Y = 350;
 }
 
 function winPlay() {
-  state = "levelOne";
-  isGameActive = true;
-  p1X = 100; //position X for player
-  p1Y = 455;
-  resetGearsLVL1();
-  resetGearsLVL2();
-  resetGearsLVL3();
-  initializeGameLogic();
+  state = "start";
 }
 
 function failPlay() {
@@ -1223,7 +1219,7 @@ function failPlay() {
   state = "levelOne";
   isGameActive = true;
   p1X = 100; //position X for player
-  p1Y = 455;
+  p1Y = 350;
   resetGearsLVL1();
   resetGearsLVL2();
   resetGearsLVL3();
