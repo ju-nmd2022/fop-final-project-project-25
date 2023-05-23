@@ -5,7 +5,7 @@ let characterState = false; // FALSE = idle, TRUE = walking
 let walkingDirection = true; // TRUE = right, FALSE = left
 let direction = 1; //forse of gravity in the y direction
 let velocity = 6; // the speed of character
-let jumpPower = 11; //how high character jumps
+let jumpPower = 11.5; //how high character jumps
 let fallingSpeed = 6; //equal to velocity
 let minHeight = 455; // height of ground
 let maxHeight = 50; // height of sky
