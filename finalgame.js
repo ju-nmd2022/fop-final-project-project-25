@@ -12,7 +12,7 @@ let maxHeight = 50; // height of sky
 let jumpCounter = 0;
 let walkingRight;
 //////////////
-let timer = 120;
+let timer = 30;
 let countDown;
 //////////////boxes variables////////////////
 let p1X = 80; //position X for player
@@ -94,7 +94,7 @@ function initializeGameLogic() {
 
 //////STATE OF THE GAME/////////
 let isGameActive = true;
-let state = "start";
+let state = "levelThree";
 
 function setup() {
   createCanvas(1200, 600);
@@ -170,10 +170,10 @@ function setup() {
   failButton.size(180, 70);
   failButton.style("font-size", "30px");
   failButton.hide();
-//GIF ANIMATION
+  //GIF ANIMATION
   // alienWalkingRight = createImg("images/alienWalkingRight.gif");
   // alienWalkingLeft = createImg("images/alienWalkingLeft.gif");
-  
+
   // // Set the position and size of the animations
   // alienWalkingRight.position(100, 100);
   // alienWalkingRight.size(100, 100);
@@ -855,6 +855,7 @@ function levelTwo() {
   background(178, 194, 131);
   showScoreLevel2();
   liquidTwo(0, 0);
+  resetTimer();
   //let the liquids display
   for (let i = 0; i < liquidLVL2.length; i++) {
     liquidLVL2[i].display();
@@ -987,6 +988,7 @@ function levelThree() {
   noStroke();
   background(0, 0, 0);
   showScoreLevel3();
+  resetTimer();
   liquidThree(0, 0);
   //let the liquids display
   for (let i = 0; i < liquidLVL3.length; i++) {
@@ -1206,10 +1208,16 @@ function startPlay() {
 function winPlay() {
   state = "levelOne";
   isGameActive = true;
+  p1X = 100; //position X for player
+  p1Y = 455;
+  resetGearsLVL1();
+  resetGearsLVL2();
+  resetGearsLVL3();
+  initializeGameLogic();
 }
 
 function failPlay() {
-  timer = 120;
+  timer = 30;
   state = "levelOne";
   isGameActive = true;
   p1X = 100; //position X for player
@@ -1232,8 +1240,9 @@ function showTimer1() {
   if (frameCount % 30 == 0 && timer > 0) {
     timer--;
   }
-  if (timer == 0) {
+  if (timer <= 0) {
     failScreen();
+    isGameActive = false;
   }
 }
 function showTimer2() {
@@ -1248,8 +1257,9 @@ function showTimer2() {
   if (frameCount % 30 == 0 && timer > 0) {
     timer--;
   }
-  if (timer == 0) {
+  if (timer <= 0) {
     failScreen();
+    isGameActive = false;
   }
 }
 function showTimer3() {
@@ -1264,11 +1274,14 @@ function showTimer3() {
   if (frameCount % 30 == 0 && timer > 0) {
     timer--;
   }
-  if (timer == 0) {
+  if (timer <= 0) {
     failScreen();
+    isGameActive = false;
   }
 }
-
+function resetTimer() {
+  timer = 30; // Reset the timer to its initial value
+}
 //////////////DRAW FUNCTION///////////////
 function draw() {
   if (state === "start") {
@@ -1283,9 +1296,9 @@ function draw() {
     levelTwo();
   } else if (state === "levelThree") {
     levelThree();
-  } else if (isGameActive === false && state === "win") {
+  } else if (state === "win") {
     winScreen();
-  } else if (isGameActive === false && state === "fail") {
+  } else if (state === "fail") {
     failScreen();
   }
 
@@ -1386,7 +1399,7 @@ function draw() {
         p1X < 1110 &&
         p1Y > 450 &&
         p1Y < 550 &&
-        gearsLVL1.length === 0
+        gearsLVL2.length === 0
       ) {
         state = "levelThree";
         p1X = 100;
@@ -1439,7 +1452,7 @@ function draw() {
       p1X < 1110 &&
       p1Y > 450 &&
       p1Y < 550 &&
-      gearsLVL1.length === 0
+      gearsLVL3.length === 0
     ) {
       state = "win";
       isGameActive === false;
