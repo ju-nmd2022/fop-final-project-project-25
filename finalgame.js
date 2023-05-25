@@ -256,7 +256,7 @@ function showScoreLevel1() {
   pop();
 }
 
-function GearsLVL1() {
+function resetGearsLVL1() {
   gearsLVL1 = []; // Reset the gearsLVL1 array to its initial state
 }
 
