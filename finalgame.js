@@ -860,9 +860,7 @@ function levelOne() {
 function levelTwo() {
   background(178, 194, 131);
   showScoreLevel2();
-  liquidTwo(0, 0);
-  resetTimer();
-  //let the liquids display
+  liquidTwo(0, 0); //let the liquids display
   for (let i = 0; i < liquidLVL2.length; i++) {
     liquidLVL2[i].display();
   }
@@ -994,7 +992,6 @@ function levelThree() {
   noStroke();
   background(0, 0, 0);
   showScoreLevel3();
-  resetTimer();
   liquidThree(0, 0);
   //let the liquids display
   for (let i = 0; i < liquidLVL3.length; i++) {
@@ -1237,7 +1234,7 @@ function showTimer1() {
   text("Timer: " + timer, 120, 120);
   noStroke();
   pop();
-  if (frameCount % 30 == 0 && timer > 0) {
+  if (frameCount % 30 === 0 && timer > 0) {
     timer--;
   }
   if (timer <= 0) {
@@ -1254,7 +1251,7 @@ function showTimer2() {
   text("Timer: " + timer, 120, 120);
   noStroke();
   pop();
-  if (frameCount % 30 == 0 && timer > 0) {
+  if (frameCount % 30 === 0 && timer > 0) {
     timer--;
   }
   if (timer <= 0) {
@@ -1271,7 +1268,7 @@ function showTimer3() {
   text("Timer: " + timer, 120, 120);
   noStroke();
   pop();
-  if (frameCount % 30 == 0 && timer > 0) {
+  if (frameCount % 30 === 0 && timer > 0) {
     timer--;
   }
   if (timer <= 0) {
@@ -1333,6 +1330,7 @@ function draw() {
         p1X = 70;
         p1Y = 455;
         gearsLVL2.length === 3;
+        resetTimer();
       }
     }
 
@@ -1405,6 +1403,7 @@ function draw() {
         p1X = 100;
         p1Y = 455;
         gearsLVL2.length === 3;
+        resetTimer();
       }
     }
   } else if (state === "levelThree") {
