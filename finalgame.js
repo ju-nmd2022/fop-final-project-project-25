@@ -1008,10 +1008,6 @@ function levelTwo() {
   }
   pop();
 
-  if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
-    isGameActive = false;
-  }
-
   for (let currentGear of gearsLVL2) {
     image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
   }
@@ -1132,10 +1128,6 @@ function levelThree() {
     image(alienFront, p1X, p1Y, pWidth, pHeight);
   }
   pop();
-  if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
-    isGameActive = false;
-  }
-
   for (let currentGear of gearsLVL3) {
     image(gear, currentGear.positionX, currentGear.positionY, 40, 40);
   }
