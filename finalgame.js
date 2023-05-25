@@ -110,7 +110,7 @@ function setup() {
   startButton.position(630, 400);
   startButton.style("color:black");
   // startButton.style.fontFamily = "Copperplate";
-  startButton.style("background-color:red");
+  // startButton.style("background-color:red");
   startButton.style("border", "none");
   startButton.style("border-radius", "10px");
   startButton.size(180, 70);
@@ -159,7 +159,7 @@ function setup() {
   winButton.mousePressed(winPlay);
   winButton.position(630, 400);
   winButton.style("color:black");
-  winButton.style("background-color:red");
+  // winButton.style("background-color:red");
   winButton.style("border-radius", "10px");
   winButton.style("border", "none");
   winButton.size(180, 70);
@@ -172,7 +172,7 @@ function setup() {
   failButton.mousePressed(failPlay);
   failButton.position(630, 400);
   failButton.style("color:black");
-  failButton.style("background-color:red");
+  // failButton.style("background-color:red");
   failButton.style("border-radius", "10px");
   failButton.style("border", "none");
   failButton.size(180, 70);
@@ -768,6 +768,8 @@ function instructionsScreen() {
   instructionsButton.hide();
   okButton.show();
 }
+
+let time = 0;
 //////////////LEVELS FUNCTIONS/////////////////////
 function levelOne() {
   background(255, 252, 186);
@@ -833,7 +835,17 @@ function levelOne() {
   //rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
-      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+      if (time <= 10) {
+        image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+      } else if (time > 10 && time <= 20) {
+        image(alienRight[1], p1X, p1Y, pWidth, pHeight);
+      } else if (time > 20) {
+        image(alienRight[2], p1X, p1Y, pWidth, pHeight);
+        if (time > 30) {
+          time = 0;
+        }
+      }
+      time++;
     } else {
       image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
     }
@@ -1186,8 +1198,14 @@ function keyReleased() {
 function preload() {
   gear = loadImage("./images/gear.png");
   alienFront = loadImage("./images/alienFront.png");
-  alienRight[0] = loadImage("./images/alienWalkingRight.gif");
-  alienLeft[0] = loadImage("./images/alienWalkingLeft.gif");
+  // alienRight[0] = loadImage("./images/alienWalkingRight.gif");
+  // alienLeft[0] = loadImage("./images/alienWalkingLeft.gif");
+  alienLeft[0] = loadImage("images/alienLeft0.png");
+  alienLeft[1] = loadImage("images/alienLeft1.png");
+  alienLeft[2] = loadImage("images/alienLeft2.png");
+  alienRight[0] = loadImage("images/alienRight0.png");
+  alienRight[1] = loadImage("images/alienRight1.png");
+  alienRight[2] = loadImage("images/alienRight2.png");
 }
 
 function historyPlay() {

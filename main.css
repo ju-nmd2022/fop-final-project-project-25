@@ -24,6 +24,7 @@ body {
 .redButtons {
   background-size: 200% auto;
   display: flex;
+  
   justify-content: center;
   align-items: center;
   text-align: center;
