@@ -29,8 +29,8 @@ let bHeight = 30;
 let gearsLVL1 = [];
 let gearsLVL2 = [];
 let gearsLVL3 = [];
-// let alienRight = [];
-// let alienLeft = [];
+let alienRight = [];
+let alienLeft = [];
 
 /////////////obstacles in levels///////////////
 let obstaclesLVL1 = [];
@@ -830,9 +830,9 @@ function levelOne() {
   //rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
-      // image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
     } else {
-      // image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
     }
   } else {
     image(alienFront, p1X, p1Y, pWidth, pHeight);
@@ -962,9 +962,9 @@ function levelTwo() {
   // rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
-      // image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
     } else {
-      // image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
     }
   } else {
     image(alienFront, p1X, p1Y, pWidth, pHeight);
@@ -1069,9 +1069,9 @@ function levelThree() {
   // rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
-      // image(alienRight[0], p1X, p1Y, pWidth, pHeight);
+      image(alienRight[0], p1X, p1Y, pWidth, pHeight);
     } else {
-      // image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
+      image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
     }
   } else {
     image(alienFront, p1X, p1Y, pWidth, pHeight);
@@ -1186,9 +1186,8 @@ function keyReleased() {
 function preload() {
   gear = loadImage("images/gear.png");
   alienFront = loadImage("images/alienFront.png");
-  // alienRight[0] = loadImage("images/alienWalkingRight.gif");
-
-  // alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
+  alienRight[0] = loadImage("images/alienWalkingRight.gif");
+  alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
 }
 
 function historyPlay() {
