@@ -1,34 +1,33 @@
-//we have watched this playlist of video tutorials https://youtu.be/FZlpuQeCvlk
-
+//we have watched this playlist of video tutorials https://youtu.be/FZlpuQeCvlk to start with the game
 window.setup = setup;
 window.draw = draw;
 
 let jump = false;
-let characterState = false; // FALSE = idle, TRUE = walking
+let characterState = false; // FALSE = stand still, TRUE = walking
 let walkingDirection = true; // TRUE = right, FALSE = left
 let direction = 1; //forse of gravity in the y direction
 let velocity = 6; // the speed of character
 let jumpPower = 11.5; //how high character jumps
 let fallingSpeed = 6; //equal to velocity
 let minHeight = 455; // height of ground
-let maxHeight = 50; // height of sky
+let maxHeight = 50; // height of roof
 let jumpCounter = 0;
 let walkingRight;
 //////////////
-let timer = 30;
-let countDown;
+let timer = 30;//for countdown
+let time = 0;//for animating the walk of the alien
 //////////////boxes variables////////////////
 let p1X = 80; //position X for player
 let p1Y = 455;
 let pWidth = 50;
 let pHeight = 95;
 
-let b1X = 210;
+let b1X = 210; //position of the first border
 let b1Y = 450;
 let bWidth = 240;
 let bHeight = 30;
 
-////////////// Objectives in levels ////////////////
+////////////// Objects in levels ////////////////
 let gearsLVL1 = [];
 let gearsLVL2 = [];
 let gearsLVL3 = [];
@@ -44,7 +43,7 @@ let obstaclesLVL3 = [];
 let liquidLVL1 = [];
 let liquidLVL2 = [];
 let liquidLVL3 = [];
-
+//we worked with the presence and some suggestions made by Arash Tarafar on the next function and the general mechanism on how to collect gears
 function initializeGameLogic() {
   gearsLVL1.push({
     image: "images/gear.png",
@@ -109,13 +108,11 @@ function setup() {
   startButton.mousePressed(startPlay);
   startButton.position(630, 400);
   startButton.style("color:black");
-  // startButton.style.fontFamily = "Copperplate";
-  // startButton.style("background-color:red");
   startButton.style("border", "none");
   startButton.style("border-radius", "10px");
   startButton.size(180, 70);
   startButton.style("font-size", "35px");
-  startButton.addClass("redButtons");
+  startButton.addClass("startButtons");
   startButton.hide();
 
   // history button
@@ -159,12 +156,11 @@ function setup() {
   winButton.mousePressed(winPlay);
   winButton.position(630, 400);
   winButton.style("color:black");
-  // winButton.style("background-color:red");
   winButton.style("border-radius", "10px");
   winButton.style("border", "none");
   winButton.size(180, 70);
   winButton.style("font-size", "30px");
-  winButton.addClass("redButtons");
+  winButton.addClass("startButtons");
   winButton.hide();
 
   // try again button failscreen
@@ -172,35 +168,23 @@ function setup() {
   failButton.mousePressed(failPlay);
   failButton.position(630, 400);
   failButton.style("color:black");
-  // failButton.style("background-color:red");
   failButton.style("border-radius", "10px");
   failButton.style("border", "none");
   failButton.size(180, 70);
   failButton.style("font-size", "30px");
-  failButton.addClass("redButtons");
+  failButton.addClass("startButtons");
   failButton.hide();
-  //GIF ANIMATION
-  // alienWalkingRight = createImg("images/alienWalkingRight.gif");
-  // alienWalkingLeft = createImg("images/alienWalkingLeft.gif");
-
-  // // Set the position and size of the animations
-  // alienWalkingRight.position(100, 100);
-  // alienWalkingRight.size(100, 100);
-  // alienWalkingLeft.position(100, 100);
-  // alienWalkingLeft.size(100, 100);
 }
 
 ///////////////OBSTACLE CLASS/////////////////
 
 class Obstacle {
-  //aggiungi nei parametri in che livello siamo
   constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
   }
-
   display() {
     // rect(this.x, this.y, this.width, this.height);
   }
@@ -251,13 +235,13 @@ function showScoreLevel1() {
   if (gearsLVL1.length === 0) {
     doorOneColorChange(0, 0);
   } else {
-    doorOne(0, 0); // Call the doorOne() function to draw the black door
+    doorOne(0, 0);
   }
   pop();
 }
 
 function resetGearsLVL1() {
-  gearsLVL1 = []; // Reset the gearsLVL1 array to its initial state
+  gearsLVL1 = []; 
 }
 
 function doorOne(x, y) {
@@ -292,13 +276,13 @@ function showScoreLevel2() {
   if (gearsLVL2.length === 0) {
     doorTwoColorChange(0, 0);
   } else {
-    doorTwo(0, 0); // Call the doorTwo() function to draw the black door
+    doorTwo(0, 0); 
   }
   pop();
 }
 
 function resetGearsLVL2() {
-  gearsLVL2 = []; // Reset the gearsLVL2 array to its initial state
+  gearsLVL2 = []; 
 }
 
 function doorTwo(x, y) {
@@ -333,13 +317,13 @@ function showScoreLevel3() {
   if (gearsLVL3.length === 0) {
     doorThreeColorChange(0, 0);
   } else {
-    doorThree(0, 0); // Call the doorThree() function to draw the black door
+    doorThree(0, 0); 
   }
   pop();
 }
 
 function resetGearsLVL3() {
-  gearsLVL3 = []; // Reset the gearsLVL3 array to its initial state
+  gearsLVL3 = []; 
 }
 
 function doorThree(x, y) {
@@ -392,8 +376,6 @@ function liquidOne(x, y) {
 
 function borderOne(x, y) {
   push();
-  //drawingContext.shadowBlur = 5;
-  //drawingContext.shadowColor = "white";
   strokeWeight(1);
   // border
   fill(225, 193, 110);
@@ -652,7 +634,6 @@ function mapThree(x, y) {
 function winScreen() {
   push();
   background(0, 0, 0);
-  // text: YOU WIN!
   fill(255, 255, 255);
   textSize(90);
   textFont("copperplate");
@@ -675,8 +656,8 @@ function failScreen() {
   background(0, 0, 0);
   // text: GAME OVER
   fill(255, 255, 255);
+  textFont("copperplate");
   textSize(90);
-  // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("GAME OVER", 600, 140);
   startButton.hide();
@@ -704,17 +685,14 @@ function startScreen() {
 ///////////////////HISTORY SCREEN//////////////////
 function historyScreen() {
   background(0, 0, 0);
-  // text: History
   fill(255, 255, 255);
   textSize(60);
-  // textFont(Copperplate);
   textAlign(CENTER, TOP);
   text("History", 590, 30);
-  // text: the little story about time traveling
   fill(255, 255, 255);
   textSize(15);
   textAlign(LEFT, TOP);
-  textLeading(25); //to make a bigger line spacing
+  textLeading(25);
   text(
     "Our game character is an adventurous time traveler, exploring the depths of time and space in his trusty time machine. However, during one of his expeditions, disaster struck, and his machine broke into pieces. \n The only way to fix it is to collect gears scattered across three different locations - the ancient Egyptian pyramids, a mysterious forest, and the vast expanse of space.\n The levels get progressively more challenging, with each level presenting new obstacles and dangers to avoid. \n To advance to the next level, the player must collect all the gears and reach the door that will transport them to the next location. \n The levels must be completed in order, with no level map screen to guide the player. If the player touches any of the obstacles - spikes or dangerous liquids - they will be sent back to the beginning of the first level. Additionally, the game includes a timer, and if the time runs out, the player must start from the first level again. \n Can you help our time traveler fix his machine and continue his exciting journey through time and space? Join the adventure and find out!",
     470,
@@ -736,7 +714,6 @@ function instructionsScreen() {
   textFont("copperplate");
   textSize(60);
   text("INSTRUCTIONS", 470, 30);
-  // text: instructions how to move etc made as an array
   let instructionsList = [
     "Use the arrow keys to move the time traveler in all directions",
     "Jump on the platforms to move forward on the level",
@@ -758,7 +735,7 @@ function instructionsScreen() {
     textAlign(LEFT, TOP);
     textLeading(35);
     textFont("Copperplate");
-    text(instructionsList[i], x, y, 700, 700); // Draw the list item with the bullet point
+    text(instructionsList[i], x, y, 700, 700); // Draw the list item
     y += textLeading(); // Increment the y position by the line spacing
   }
   startButton.hide();
@@ -768,8 +745,6 @@ function instructionsScreen() {
   instructionsButton.hide();
   okButton.show();
 }
-
-let time = 0;
 //////////////LEVELS FUNCTIONS/////////////////////
 function levelOne() {
   background(255, 252, 186);
@@ -830,9 +805,7 @@ function levelOne() {
   }
 
   push();
-  // character
-  fill(0, 0, 0);
-  //rect(p1X, p1Y, pWidth, pHeight);
+   // we got helped by Eveline and Garrit in the labs to animate the alien walk
   if (characterState) {
     if (walkingDirection) {
       if (time <= 5) {
@@ -845,7 +818,7 @@ function levelOne() {
           time = 0;
         }
       }
-    } else { 
+    } else {
       if (time <= 5) {
         image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
       } else if (time > 5 && time <= 10) {
@@ -975,9 +948,6 @@ function levelTwo() {
   }
   ///////////////
   push();
-  // character
-  fill(0, 0, 0);
-  // rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
       if (time <= 5) {
@@ -990,7 +960,7 @@ function levelTwo() {
           time = 0;
         }
       }
-    } else { 
+    } else {
       if (time <= 5) {
         image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
       } else if (time > 5 && time <= 10) {
@@ -1096,9 +1066,7 @@ function levelThree() {
   }
 
   push();
-  // character
-  fill(255, 255, 255);
-  // rect(p1X, p1Y, pWidth, pHeight);
+
   if (characterState) {
     if (walkingDirection) {
       if (time <= 5) {
@@ -1111,7 +1079,7 @@ function levelThree() {
           time = 0;
         }
       }
-    } else { 
+    } else {
       if (time <= 5) {
         image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
       } else if (time > 5 && time <= 10) {
@@ -1186,7 +1154,7 @@ function gravity() {
     p1Y = p1Y;
     jumpCounter = 0; //reset jumpCounter
   } else {
-    p1Y = p1Y + direction * velocity; //makes gravity work
+    p1Y = p1Y + direction * velocity; 
   }
 
   if (jump === true) {
@@ -1217,7 +1185,7 @@ function keyPressed() {
     walkingDirection = true;
   }
 
-  if (isGameActive === true && keyIsDown(38)) {
+  if (isGameActive === true && keyIsDown(38)) {// jumping
     jump = true;
   } else {
     jump = false;
@@ -1232,8 +1200,6 @@ function keyReleased() {
 function preload() {
   gear = loadImage("./images/gear.png");
   alienFront = loadImage("./images/alienFront.png");
-  // alienRight[0] = loadImage("./images/alienWalkingRight.gif");
-  // alienLeft[0] = loadImage("./images/alienWalkingLeft.gif");
   alienLeft[0] = loadImage("images/alienLeft0.png");
   alienLeft[1] = loadImage("images/alienLeft1.png");
   alienLeft[2] = loadImage("images/alienLeft2.png");
@@ -1262,7 +1228,15 @@ function startPlay() {
 }
 
 function winPlay() {
+  timer = 30;
   state = "start";
+  isGameActive = true;
+  p1X = 100; //position X for player
+  p1Y = 350;
+  resetGearsLVL1();
+  resetGearsLVL2();
+  resetGearsLVL3();
+  initializeGameLogic();
 }
 
 function failPlay() {
@@ -1277,6 +1251,7 @@ function failPlay() {
   initializeGameLogic();
 }
 /////////////////TIMER FUNCTION//////////////////
+//we consulted the p5.js library on how to create a timer counting down https://editor.p5js.org/marynotari/sketches/S1T2ZTMp-
 function showTimer1() {
   textAlign(CENTER, CENTER);
   push();
@@ -1352,6 +1327,7 @@ function draw() {
   }
 
   ///////////////////// switching the levels//////////////////
+  //we got helped by Eveline in the labs for positioning precisely the liquids and the obstacles
   if (state === "levelOne") {
     for (let i = 0; i < liquidLVL1.length; i++) {
       let liquid = liquidLVL1[i];
@@ -1367,8 +1343,8 @@ function draw() {
           p1Y + pHeight >= liquid.y &&
           p1Y + pHeight <= liquid.y + 55)
       ) {
-        // Collision detected, end the game
-        isGameActive = false; // Set the game state to inactive
+        // collision detected, game over
+        isGameActive = false; // it sets the game state to not active
         failScreen();
       }
       if (
@@ -1400,8 +1376,8 @@ function draw() {
           p1Y + pHeight >= obstacle.y &&
           p1Y + pHeight <= obstacle.y + 55)
       ) {
-        // Collision detected, end the game
-        isGameActive = false; // Set the game state to inactive
+        // collision detected, game over
+        isGameActive = false; // it sets the game state to not active
         failScreen();
       }
     }
@@ -1420,7 +1396,7 @@ function draw() {
           p1Y + pHeight >= obstacle.y &&
           p1Y + pHeight <= obstacle.y + 55)
       ) {
-        // Collision detected, end the game
+        // collision detected, game over
         failScreen();
         isGameActive = false;
       }
@@ -1440,7 +1416,7 @@ function draw() {
           p1Y + pHeight >= liquid.y &&
           p1Y + pHeight <= liquid.y + 55)
       ) {
-        // Collision detected, end the game
+        // collision detected, game over
         failScreen();
         isGameActive = false;
       }
@@ -1473,7 +1449,7 @@ function draw() {
           p1Y + pHeight >= obstacle.y &&
           p1Y + pHeight <= obstacle.y + 55)
       ) {
-        // Collision detected, end the game
+        // collision detected, game over
         failScreen();
         isGameActive = false;
       }
@@ -1493,7 +1469,7 @@ function draw() {
           p1Y + pHeight >= liquid.y &&
           p1Y + pHeight <= liquid.y + 55)
       ) {
-        // Collision detected, end the game
+        // collision detected, game over
         failScreen();
         isGameActive = false;
       }

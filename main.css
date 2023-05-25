@@ -21,10 +21,10 @@ body {
   z-index: -1;
 }
 
-.redButtons {
+.startButtons {
   background-size: 200% auto;
   display: flex;
-  
+
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -39,7 +39,7 @@ body {
   );
 }
 
-.redButtons:hover {
+.startButtons:hover {
   background-position: right center;
   transform: scale(0.9);
   cursor: pointer;
