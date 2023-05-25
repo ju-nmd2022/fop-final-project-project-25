@@ -9,7 +9,7 @@ body {
   align-items: center;
 }
 
-/* .background {
+.background {
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@ body {
   background-size: cover;
   background-position: center;
   z-index: -1;
-} */
+}
 
 .redButtons {
   background-size: 200% auto;
