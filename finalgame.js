@@ -980,29 +980,29 @@ function levelTwo() {
   // rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
-      if (time <= 10) {
+      if (time <= 5) {
         image(alienRight[0], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 10 && time <= 20) {
+      } else if (time > 5 && time <= 10) {
         image(alienRight[1], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 20) {
+      } else if (time > 10) {
         image(alienRight[2], p1X, p1Y, pWidth, pHeight);
-        if (time > 30) {
+        if (time > 15) {
           time = 0;
         }
       }
-      time++;
-    } else {
-      if (time <= 10) {
+    } else { 
+      if (time <= 5) {
         image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 10 && time <= 20) {
+      } else if (time > 5 && time <= 10) {
         image(alienLeft[1], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 20) {
+      } else if (time > 10) {
         image(alienLeft[2], p1X, p1Y, pWidth, pHeight);
-        if (time > 30) {
+        if (time > 15) {
           time = 0;
         }
       }
     }
+    time++;
   } else {
     image(alienFront, p1X, p1Y, pWidth, pHeight);
   }
@@ -1105,34 +1105,33 @@ function levelThree() {
   // rect(p1X, p1Y, pWidth, pHeight);
   if (characterState) {
     if (walkingDirection) {
-      if (time <= 10) {
+      if (time <= 5) {
         image(alienRight[0], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 10 && time <= 20) {
+      } else if (time > 5 && time <= 10) {
         image(alienRight[1], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 20) {
+      } else if (time > 10) {
         image(alienRight[2], p1X, p1Y, pWidth, pHeight);
-        if (time > 30) {
+        if (time > 15) {
           time = 0;
         }
       }
-      time++;
-    } else {
-      if (time <= 10) {
+    } else { 
+      if (time <= 5) {
         image(alienLeft[0], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 10 && time <= 20) {
+      } else if (time > 5 && time <= 10) {
         image(alienLeft[1], p1X, p1Y, pWidth, pHeight);
-      } else if (time > 20) {
+      } else if (time > 10) {
         image(alienLeft[2], p1X, p1Y, pWidth, pHeight);
-        if (time > 30) {
+        if (time > 15) {
           time = 0;
         }
       }
     }
+    time++;
   } else {
     image(alienFront, p1X, p1Y, pWidth, pHeight);
   }
   pop();
-
   if (p1X >= 200 && p1X <= 455 && p1Y >= 480 && p1Y <= 550) {
     isGameActive = false;
   }
