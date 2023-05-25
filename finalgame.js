@@ -1,5 +1,8 @@
 //we have watched this playlist of video tutorials https://youtu.be/FZlpuQeCvlk
 
+window.setup= setup;
+window.draw= draw;
+
 let jump = false;
 let characterState = false; // FALSE = idle, TRUE = walking
 let walkingDirection = true; // TRUE = right, FALSE = left
