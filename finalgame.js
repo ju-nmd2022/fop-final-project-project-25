@@ -1187,10 +1187,10 @@ function keyReleased() {
 }
 
 function preload() {
-  gear = loadImage("images/gear.png");
-  alienFront = loadImage("images/alienFront.png");
-  alienRight[0] = loadImage("images/alienWalkingRight.gif");
-  alienLeft[0] = loadImage("images/alienWalkingLeft.gif");
+  gear = loadImage("./images/gear.png");
+  alienFront = loadImage("./images/alienFront.png");
+  alienRight[0] = loadImage("./images/alienWalkingRight.gif");
+  alienLeft[0] = loadImage("./images/alienWalkingLeft.gif");
 }
 
 function historyPlay() {
